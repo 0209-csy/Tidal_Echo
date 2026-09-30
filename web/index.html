@@ -50,7 +50,7 @@
     --menu-wall-harbor: url("menu-harbor.webp");
     --menu-wall-default: var(--menu-wall-light);
     --avatar-default: url("avatar-sea.png");
-    /* ── PEARL TIDE · 珍珠潮汐(default) ── */
+    /* 鈹€鈹€ PEARL TIDE 路 鐝嶇彔娼睈(default) 鈹€鈹€ */
     --bg: #F7FAFC;
     --header-bg: #F7FAFC;
     --hairline: rgba(120,142,165,.24);
@@ -84,11 +84,11 @@
     --motion-fast: 150ms;
     --motion-normal: 260ms;
     --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
-    /* composer 占据的底部区域(含安全区/键盘):scroll 底 padding 与边缘渐隐共用同一来源,保持对齐 */
+    /* composer 鍗犳嵁鐨勫簳閮ㄥ尯鍩�(鍚畨鍏ㄥ尯/閿洏):scroll 搴� padding 涓庤竟缂樻笎闅愬叡鐢ㄥ悓涓€鏉ユ簮,淇濇寔瀵归綈 */
     --composer-zone: calc(var(--composer-h) + 16px + env(safe-area-inset-bottom) + var(--keyboard-offset));
     --edge-fade-top: clamp(24px, 5vw, 52px);
     --edge-fade-tail: clamp(16px, 3vw, 30px);
-    /* profile / settings — frosted glass, blends into the wallpaper */
+    /* profile / settings 鈥� frosted glass, blends into the wallpaper */
     --card-bg: rgba(244,248,250,.42);
     --card-line: rgba(150,168,182,.12);
     --card-shadow: 0 10px 28px rgba(70,92,108,.05);
@@ -111,7 +111,7 @@
     --call-hangup-bg: #cf8d92;
     --call-hangup-shadow: rgba(176,96,104,.34);
   }
-  /* ── HARBOR · 海港(通用开源主题 / Tidal Echo) ── 中性冷调,供 fork 使用;只覆盖带色相变量,其余继承 PEARL TIDE */
+  /* 鈹€鈹€ HARBOR 路 娴锋腐(閫氱敤寮€婧愪富棰� / Tidal Echo) 鈹€鈹€ 涓€у喎璋�,渚� fork 浣跨敤;鍙鐩栧甫鑹茬浉鍙橀噺,鍏朵綑缁ф壙 PEARL TIDE */
   :root[data-theme="harbor"]{
       --wall-default: var(--wall-harbor);
       --menu-wall-default: var(--menu-wall-harbor);
@@ -181,7 +181,7 @@
   }
   .topbar, .scroll, .composer{ position: relative; z-index: 1; }
 
-  /* ── Header (floating frosted pill + corner avatar) ── */
+  /* 鈹€鈹€ Header (floating frosted pill + corner avatar) 鈹€鈹€ */
   .topbar{
     position: sticky; top: 0; z-index: 10;
     display: flex; align-items: center; justify-content: center;
@@ -234,6 +234,11 @@
   }
   .backbtn:active{ transform: scale(.9); }
   .backbtn svg{ width:22px; height:22px; display:block; margin-left:-2px; }
+  .topbar > .sessions{
+    position:absolute;
+    left: calc(var(--side-pad) + 42px);
+    top: calc(env(safe-area-inset-top) + clamp(14px, 2.5vw, 36px));
+  }
   .header-actions{
     position:absolute;
     right: calc(var(--side-pad) - 2px);
@@ -263,7 +268,8 @@
   .topbtn.terminal.active{ color:var(--accent); }
   .session-pop{
     position:absolute;
-    right: calc(var(--side-pad) + 34px);
+    left: calc(var(--side-pad) + 18px);
+    right: auto;
     top: calc(env(safe-area-inset-top) + clamp(58px, 8vw, 82px));
     z-index:30;
     width:min(82vw, 320px);
@@ -428,7 +434,7 @@
     outline-offset: 3px;
   }
 
-  /* ── Messages ── */
+  /* 鈹€鈹€ Messages 鈹€鈹€ */
   .scroll{
     flex: 1 1 auto;
     overflow-y: auto;
@@ -439,7 +445,7 @@
     padding: clamp(14px, 2.4vw, 28px) var(--side-pad) var(--composer-zone);
     display: flex; flex-direction: column;
     transition: padding-bottom .28s cubic-bezier(.2,.8,.2,1);
-    /* 边缘渐隐:顶部一段、底部对齐 composer 上沿一段,消息滚到边缘自然淡出 */
+    /* 杈圭紭娓愰殣:椤堕儴涓€娈点€佸簳閮ㄥ榻� composer 涓婃部涓€娈�,娑堟伅婊氬埌杈圭紭鑷劧娣″嚭 */
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 var(--edge-fade-top), #000 calc(100% - var(--composer-zone)), transparent calc(100% - var(--composer-zone) + var(--edge-fade-tail)));
     mask-image: linear-gradient(to bottom, transparent 0, #000 var(--edge-fade-top), #000 calc(100% - var(--composer-zone)), transparent calc(100% - var(--composer-zone) + var(--edge-fade-tail)));
     -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
@@ -515,7 +521,7 @@
   .row[data-vkey] .bubble,
   .row[data-vkey] .think-block{ animation: none; }
   @keyframes pop{ from{ transform: translateY(5px) scale(.99);} to{ transform:none;} }
-  /* 新消息入场:轻微弹性,只对刚发/刚收到那条播一次(虚拟列表复用不重播,JS 控 enter class) */
+  /* 鏂版秷鎭叆鍦�:杞诲井寮规€�,鍙鍒氬彂/鍒氭敹鍒伴偅鏉℃挱涓€娆�(铏氭嫙鍒楄〃澶嶇敤涓嶉噸鎾�,JS 鎺� enter class) */
   .row[data-vkey].enter-human .bubble{ transform-origin: bottom right; animation: enterHuman .44s cubic-bezier(.34,1.46,.5,1) both; }
   .row[data-vkey].enter-ai .bubble{ transform-origin: bottom left; animation: enterAi .44s cubic-bezier(.34,1.46,.5,1) both; }
   @keyframes enterHuman{ from{ transform: translate(6px, 9px) scale(.95); opacity:0; } 55%{ opacity:1; } to{ transform:none; opacity:1; } }
@@ -532,7 +538,7 @@
     border: 0;
     box-shadow: 0 10px 28px rgba(78, 94, 108, 0.08);
   }
-  /* 每段最后一条:外下角收一个小尖 */
+  /* 姣忔鏈€鍚庝竴鏉�:澶栦笅瑙掓敹涓€涓皬灏� */
   .row.ai.tail .bubble{ border-bottom-left-radius: 2px; }
   .row.human.tail .bubble{ border-bottom-right-radius: 2px; }
 
@@ -549,7 +555,7 @@
   .att-file-size{ font-size:11px; opacity:.6; margin-top:2px; }
   .att-uploading{ opacity:.62; }
   .att-img-dead img{ display:none; }
-  .att-img-dead::after{ content:"⚠ 图片已失效"; display:inline-block; padding:16px 20px; font-size:12px; color:var(--text-faint); background:rgba(125,128,135,.14); border-radius:14px; }
+  .att-img-dead::after{ content:"鈿� 鍥剧墖宸插け鏁�"; display:inline-block; padding:16px 20px; font-size:12px; color:var(--text-faint); background:rgba(125,128,135,.14); border-radius:14px; }
   .att-failed{ outline:1.5px solid #e3534d; outline-offset:1px; }
   .bubble .txt a{ color: inherit; text-decoration: underline; text-underline-offset: 2px; }
   .bubble .txt code{
@@ -570,11 +576,11 @@
   .row.ai .meta{ color: var(--text-faint); }
   .row.human .meta .tick,
   .row.ai .meta .tick{ color: var(--tick); }
-  /* 发送中:小时钟,转完即送达 → 同位换成 ✓✓ */
+  /* 鍙戦€佷腑:灏忔椂閽�,杞畬鍗抽€佽揪 鈫� 鍚屼綅鎹㈡垚 鉁撯湏 */
   .meta .tick.clock{ color: var(--tick); }
   .meta .tick.clock svg{ width: 1.05em; height: 1.05em; vertical-align: -0.18em; }
 
-  /* ── thinking ── collapsed follows AI bubble; expanded becomes a quiet reading section ── */
+  /* 鈹€鈹€ thinking 鈹€鈹€ collapsed follows AI bubble; expanded becomes a quiet reading section 鈹€鈹€ */
   .row.think{
     justify-content: flex-start;
     padding-left: calc(var(--avatar-size) + clamp(10px, 1.6vw, 16px));
@@ -662,8 +668,8 @@
     transform: translateY(-.02em);
   }
   .think-block.open .think-caption-star{ display: none; }
-  .think-state::before{ content: "✧"; }
-  .think-block.open .think-state::before{ content: "✦"; }
+  .think-state::before{ content: "鉁�"; }
+  .think-block.open .think-state::before{ content: "鉁�"; }
   .think-body[hidden]{ display: none !important; }
   .think-body{
     margin-top: clamp(12px, 2.2vw, 20px);
@@ -717,8 +723,8 @@
     border-radius: 5px;
   }
 
-  /* ── act ── the AI's action chip: a quiet "what it just did", optionally expand to see raw tool calls ──
-     视觉与 thinking 同一族(--think-* 配色),但更小、更收,贴在头像缝隙里,不抢气泡 ── */
+  /* 鈹€鈹€ act 鈹€鈹€ the AI's action chip: a quiet "what it just did", optionally expand to see raw tool calls 鈹€鈹€
+     瑙嗚涓� thinking 鍚屼竴鏃�(--think-* 閰嶈壊),浣嗘洿灏忋€佹洿鏀�,璐村湪澶村儚缂濋殭閲�,涓嶆姠姘旀场 鈹€鈹€ */
   .row.act{
     justify-content: flex-start;
     padding-left: calc(var(--avatar-size) + clamp(10px, 1.6vw, 16px));
@@ -747,12 +753,12 @@
   }
   .act-label{
     color: var(--think-label);
-    font-family: var(--font-cn);                /* 统一宋体:--font-en 末尾的通用 serif 会先吃掉 CJK→iOS 回退黑体 */
+    font-family: var(--font-cn);                /* 缁熶竴瀹嬩綋:--font-en 鏈熬鐨勯€氱敤 serif 浼氬厛鍚冩帀 CJK鈫抜OS 鍥為€€榛戜綋 */
     font-size: clamp(12px, 1.32vw, 13.5px);
     line-height: 1.46;
     letter-spacing: .02em;
   }
-  /* 展开指示:沿用 thinking 的空心星 ✧(收起)→ 实心 ✦(展开),比"· 展开"文字更轻、不突兀 */
+  /* 灞曞紑鎸囩ず:娌跨敤 thinking 鐨勭┖蹇冩槦 鉁�(鏀惰捣)鈫� 瀹炲績 鉁�(灞曞紑),姣�"路 灞曞紑"鏂囧瓧鏇磋交銆佷笉绐佸厐 */
   .act-state{
     flex: none;
     color: var(--think-flourish);
@@ -761,8 +767,8 @@
     transform: translateY(.02em);
     transition: color var(--motion-fast) var(--ease-soft);
   }
-  .act-state::before{ content: "✧"; }
-  .act-block.open .act-state::before{ content: "✦"; }
+  .act-state::before{ content: "鉁�"; }
+  .act-block.open .act-state::before{ content: "鉁�"; }
   .act-toggle:hover .act-state{ color: var(--accent); }
   .act-toggle:hover .act-label{ color: var(--think-body); }
   .act-toggle:active{ transform: translateY(1px); }
@@ -788,7 +794,7 @@
   .act-v{ color: var(--think-body); }
 
 
-  /* ── Composer ── */
+  /* 鈹€鈹€ Composer 鈹€鈹€ */
   .composer{
     position: fixed;
     left: 0;
@@ -820,7 +826,7 @@
     box-shadow: 0 16px 32px rgba(41, 60, 78, 0.22);
   }
   .floatbtn.send:hover{ color:#ffffff; }
-  .floatbtn.send:active{ transform: scale(.97); }      /* 发送键按压:轻收 3%(比通用 .floatbtn 的 .9 克制) */
+  .floatbtn.send:active{ transform: scale(.97); }      /* 鍙戦€侀敭鎸夊帇:杞绘敹 3%(姣旈€氱敤 .floatbtn 鐨� .9 鍏嬪埗) */
   @keyframes send-go{ from{ transform: scale(.96); } to{ transform: scale(1); } }
   .floatbtn.send.send-go{ animation: send-go .22s cubic-bezier(.2,.8,.2,1); }
   @media (prefers-reduced-motion: reduce){ .floatbtn.send.send-go{ animation: none; } }
@@ -854,7 +860,7 @@
   .emojibtn:active{ transform: scale(.85); color: var(--text); }
   .emojibtn:hover{ color: var(--text); }
   .emojibtn svg{ width: clamp(22px, 3vw, 30px); height: clamp(22px, 3vw, 30px); display:block; }
-  /* ── 回到最新 · 翻历史时来新消息,底部悬浮一枚安静的半透明胶囊 ── */
+  /* 鈹€鈹€ 鍥炲埌鏈€鏂� 路 缈诲巻鍙叉椂鏉ユ柊娑堟伅,搴曢儴鎮诞涓€鏋氬畨闈欑殑鍗婇€忔槑鑳跺泭 鈹€鈹€ */
   .newmsg-pill{
     position: fixed; left: 50%; z-index: 90;
     bottom: calc(clamp(78px, 13vw, 96px) + env(safe-area-inset-bottom));
@@ -872,7 +878,7 @@
   .newmsg-pill svg{ width: 15px; height: 15px; flex: none; }
   @media (prefers-reduced-motion: reduce){ .newmsg-pill{ transition: opacity .2s ease; } }
 
-  /* ── Login ── */
+  /* 鈹€鈹€ Login 鈹€鈹€ */
   .login{
     position: fixed; inset:0; z-index: 50;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -909,7 +915,7 @@
   .hidden{ display:none !important; }
   .app.kb .composer{ padding-bottom: 8px; }
 
-  /* ── Profile page (full-screen settings) ── */
+  /* 鈹€鈹€ Profile page (full-screen settings) 鈹€鈹€ */
   .profile-panel{
     position: fixed;
     inset: 0;
@@ -1039,7 +1045,7 @@
     color: var(--text-faint); letter-spacing:.01em;
   }
 
-  /* ── API loop cards(模型链 / 上文 / 人格 / MCP)── */
+  /* 鈹€鈹€ API loop cards(妯″瀷閾� / 涓婃枃 / 浜烘牸 / MCP)鈹€鈹€ */
   .loop-rows{ display:flex; flex-direction:column; gap:8px; }
   .loop-row{ display:grid; grid-template-columns: 1fr auto; gap:6px; align-items:start; }
   .loop-row .loop-inputs{ display:grid; gap:6px; min-width:0; }
@@ -1211,7 +1217,7 @@
     .profile-scroll{ gap:22px; }
   }
 
-  /* ── Menu (hub / home page · 从聊天页左箭头进入) ── */
+  /* 鈹€鈹€ Menu (hub / home page 路 浠庤亰澶╅〉宸︾澶磋繘鍏�) 鈹€鈹€ */
   .menu-panel{
     position: fixed; inset: 0; z-index: 190;
     pointer-events: none;
@@ -1240,13 +1246,13 @@
   }
   .menu-scroll::-webkit-scrollbar{ width:0; height:0; }
 
-  /* header: 玻璃液态日夜 toggle(左) · PRIVATE SPACE(右) */
+  /* header: 鐜荤拑娑叉€佹棩澶� toggle(宸�) 路 PRIVATE SPACE(鍙�) */
   .menu-head{
     flex: 0 0 auto;
     display:flex; align-items:flex-start; justify-content:space-between;
     margin-bottom: clamp(34px, 10vw, 68px);
   }
-  /* (主题切换已移至设置页 #themeSeg;原菜单页玻璃 toggle 的 CSS 已随标记一并移除) */
+  /* (涓婚鍒囨崲宸茬Щ鑷宠缃〉 #themeSeg;鍘熻彍鍗曢〉鐜荤拑 toggle 鐨� CSS 宸查殢鏍囪涓€骞剁Щ闄�) */
   .menu-private{
     text-align:right; line-height:1.55;
     font-family: var(--font-en), var(--font-cn);
@@ -1258,7 +1264,7 @@
     width: clamp(20px, 5.5vw, 26px); height:1px; background: var(--text-faint); opacity:.6;
   }
 
-  /* hero: app title · since · days */
+  /* hero: app title 路 since 路 days */
   .menu-hero{ flex: 0 0 auto; margin-bottom: clamp(38px, 11vw, 72px); }
   .menu-title{
     font-family: "Pinyon Script", var(--font-en), cursive;
@@ -1326,7 +1332,7 @@
     letter-spacing:.05em; color: var(--text-faint);
   }
 
-  /* ── Voice call (speaking overlay · 假按键 / 纯 UI,后端以后接) ── */
+  /* 鈹€鈹€ Voice call (speaking overlay 路 鍋囨寜閿� / 绾� UI,鍚庣浠ュ悗鎺�) 鈹€鈹€ */
   .call-overlay{
     position: fixed; inset: 0; z-index: 150;
     pointer-events: none;
@@ -1355,7 +1361,7 @@
   }
   .call-overlay.open .call-sheet{ opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-  /* ── Avatar stage: 头像 + 两翼声纹 ── */
+  /* 鈹€鈹€ Avatar stage: 澶村儚 + 涓ょ考澹扮汗 鈹€鈹€ */
   .call-avatar-stage{
     display: flex; align-items: center; justify-content: center;
     width: 100%;
@@ -1386,7 +1392,7 @@
   @keyframes callVuIdle{ from{ transform: scaleY(.55); } to{ transform: scaleY(1); } }
   @media (prefers-reduced-motion: reduce){ .call-vu i{ animation: none; } }
 
-  /* ── Avatar ring ── */
+  /* 鈹€鈹€ Avatar ring 鈹€鈹€ */
   .call-avatar-ring{
     --ring-level: 0;
     position: relative;
@@ -1407,7 +1413,7 @@
     box-shadow: inset 0 0 0 1px rgba(255,255,255,.14);
   }
 
-  /* ── Name / status / timer ── */
+  /* 鈹€鈹€ Name / status / timer 鈹€鈹€ */
   .call-name{
     margin-top: clamp(18px, 4vw, 28px);
     color: var(--text);
@@ -1438,14 +1444,14 @@
     margin-top: 9px;
   }
 
-  /* ── Quote (the AI's last spoken line) ── */
+  /* 鈹€鈹€ Quote (the AI's last spoken line) 鈹€鈹€ */
   .call-quote{
     flex: 1 1 auto;
-    min-height: 0;                 /* 让 flex 能真正约束它,长文本不再撑破/盖住头像与字幕 */
+    min-height: 0;                 /* 璁� flex 鑳界湡姝ｇ害鏉熷畠,闀挎枃鏈笉鍐嶆拺鐮�/鐩栦綇澶村儚涓庡瓧骞� */
     display: flex; align-items: center; justify-content: center;
     width: min(88vw, 400px);
     padding: clamp(8px, 2vw, 18px) clamp(8px, 2vw, 16px);
-    overflow: hidden;              /* 兜底:绝不溢出到相邻区域 */
+    overflow: hidden;              /* 鍏滃簳:缁濅笉婧㈠嚭鍒扮浉閭诲尯鍩� */
   }
   .call-quote-mark{
     color: var(--text-faint);
@@ -1462,7 +1468,7 @@
     max-height: 100%;
     overflow-y: auto;
     overscroll-behavior: contain;
-    scrollbar-width: none;                 /* Firefox 隐藏滚动条 */
+    scrollbar-width: none;                 /* Firefox 闅愯棌婊氬姩鏉� */
     color: var(--text);
     font-family: var(--font-cn);
     font-size: clamp(20px, 5.2vw, 27px);
@@ -1471,9 +1477,9 @@
     padding: 0 clamp(6px, 1.5vw, 12px);
     overflow-wrap: break-word;
   }
-  .call-quote-text::-webkit-scrollbar{ display: none; }   /* WebKit 隐藏滚动条 */
-  /* 仅当文字真的溢出时(由 JS 加 .clip)才底部渐隐(顶部保持清晰,因为总是从头读起,
-     渐隐只用来暗示"下面还有,全文在字幕条里") */
+  .call-quote-text::-webkit-scrollbar{ display: none; }   /* WebKit 闅愯棌婊氬姩鏉� */
+  /* 浠呭綋鏂囧瓧鐪熺殑婧㈠嚭鏃�(鐢� JS 鍔� .clip)鎵嶅簳閮ㄦ笎闅�(椤堕儴淇濇寔娓呮櫚,鍥犱负鎬绘槸浠庡ご璇昏捣,
+     娓愰殣鍙敤鏉ユ殫绀�"涓嬮潰杩樻湁,鍏ㄦ枃鍦ㄥ瓧骞曟潯閲�") */
   .call-quote-text.clip{
     -webkit-mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 22px), transparent 100%);
             mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 22px), transparent 100%);
@@ -1498,7 +1504,7 @@
     transform: scale(1);
   }
 
-  /* ── Transcript section ── */
+  /* 鈹€鈹€ Transcript section 鈹€鈹€ */
   .call-transcript-section{
     width: min(92vw, 440px);
     display: flex; flex-direction: column; align-items: center;
@@ -1522,7 +1528,7 @@
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Cline x1='4' y1='9' x2='4' y2='15'/%3E%3Cline x1='9' y1='4.5' x2='9' y2='19.5'/%3E%3Cline x1='14' y1='7.5' x2='14' y2='16.5'/%3E%3Cline x1='19' y1='10.5' x2='19' y2='13.5'/%3E%3C/svg%3E") center/contain no-repeat;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Cline x1='4' y1='9' x2='4' y2='15'/%3E%3Cline x1='9' y1='4.5' x2='9' y2='19.5'/%3E%3Cline x1='14' y1='7.5' x2='14' y2='16.5'/%3E%3Cline x1='19' y1='10.5' x2='19' y2='13.5'/%3E%3C/svg%3E") center/contain no-repeat;
   }
-  /* 「我在想 …」跳动点(引号区,贴心提示) */
+  /* 銆屾垜鍦ㄦ兂 鈥︺€嶈烦鍔ㄧ偣(寮曞彿鍖�,璐村績鎻愮ず) */
   .call-dots{ display: inline-flex; align-items: center; gap: 4px; }
   .call-dots i{
     width: 4px; height: 4px; border-radius: 50%;
@@ -1550,7 +1556,7 @@
     line-height: 1.6;
     text-align: center;
     overflow-wrap: break-word;
-    max-height: clamp(72px, 16vh, 132px);   /* 长字幕也封顶,不再把控制键/挂断顶出屏外 */
+    max-height: clamp(72px, 16vh, 132px);   /* 闀垮瓧骞曚篃灏侀《,涓嶅啀鎶婃帶鍒堕敭/鎸傛柇椤跺嚭灞忓 */
     overflow-y: auto;
     overscroll-behavior: contain;
     scrollbar-width: none;
@@ -1564,7 +1570,7 @@
   }
   @keyframes callCaret{ 0%,49%{ opacity:.55; } 50%,100%{ opacity:0; } }
 
-  /* ── Controls row ── */
+  /* 鈹€鈹€ Controls row 鈹€鈹€ */
   .call-controls{
     display: flex; align-items: flex-start; justify-content: center;
     gap: clamp(30px, 9vw, 50px);
@@ -1601,7 +1607,7 @@
     border-color: transparent;
   }
 
-  /* ── Hangup ── */
+  /* 鈹€鈹€ Hangup 鈹€鈹€ */
   .call-hangup{
     margin-top: clamp(20px, 4vw, 32px);
     width: clamp(64px, 15.5vw, 74px); height: clamp(64px, 15.5vw, 74px);
@@ -1617,7 +1623,7 @@
   .call-hangup:active{ transform: scale(.92); }
   .call-hangup svg{ width: clamp(26px, 5.6vw, 31px); height: clamp(26px, 5.6vw, 31px); display: block; transform: rotate(135deg); }
 
-  /* ── Minimize (top-left) ── */
+  /* 鈹€鈹€ Minimize (top-left) 鈹€鈹€ */
   .call-minimize-top{
     position: absolute;
     top: calc(env(safe-area-inset-top) + clamp(10px, 2vw, 16px));
@@ -1637,10 +1643,10 @@
   .call-minimize-top:active{ transform: scale(.9); }
   .call-minimize-top svg{ width: 18px; height: 18px; display: block; }
 
-  /* ── Hide old wave (no longer visible) ── */
+  /* 鈹€鈹€ Hide old wave (no longer visible) 鈹€鈹€ */
   .call-wave{ display: none; }
 
-  /* ── Call mini-bar (WeChat-style green strip) ── */
+  /* 鈹€鈹€ Call mini-bar (WeChat-style green strip) 鈹€鈹€ */
   .call-mini{
     display: none;
     position: fixed;
@@ -1680,14 +1686,14 @@
   .call-overlay.open.minimized .call-mini{ display: flex; }
   .call-overlay.open.minimized{ pointer-events: none; }
 
-  /* 来电:全屏(与通话中同一张画布,接听后无缝衔接,不再是顶部小卡片) */
+  /* 鏉ョ數:鍏ㄥ睆(涓庨€氳瘽涓悓涓€寮犵敾甯�,鎺ュ惉鍚庢棤缂濊鎺�,涓嶅啀鏄《閮ㄥ皬鍗＄墖) */
   .incoming-call-overlay{ z-index: 151; }
   .incoming-call-overlay .call-scrim{ background: var(--call-scrim); }
   .incoming-call-overlay .call-sheet{
     justify-content: flex-start;
     gap: clamp(12px, 2.6vw, 20px);
   }
-  /* caption 行(✦ incoming call ✦)——与 .call-status 同款横排 */
+  /* caption 琛�(鉁� incoming call 鉁�)鈥斺€斾笌 .call-status 鍚屾妯帓 */
   .call-caption{
     display: inline-flex; align-items: center; gap: 11px;
     color: var(--think-label);
@@ -1698,7 +1704,7 @@
   }
   .call-caption .call-star{ color: var(--think-flourish); display: grid; place-items: center; }
   .call-caption .call-star svg{ width: 16px; height: 16px; display: block; }
-  /* 来电大头像 + 呼吸光环 */
+  /* 鏉ョ數澶уご鍍� + 鍛煎惛鍏夌幆 */
   .incoming-call-avatar{
     width: clamp(132px, 40vw, 184px); height: clamp(132px, 40vw, 184px);
     border-radius: 50%;
@@ -1714,7 +1720,7 @@
     100% { box-shadow: 0 12px 38px rgba(40,60,78,.18), 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent), inset 0 0 0 1px rgba(255,255,255,.14); }
   }
   @media (prefers-reduced-motion: reduce){ .incoming-call-avatar{ animation: none; } }
-  /* 来电动作区:推到底部,拒接/接听左右分开(iOS 式) */
+  /* 鏉ョ數鍔ㄤ綔鍖�:鎺ㄥ埌搴曢儴,鎷掓帴/鎺ュ惉宸﹀彸鍒嗗紑(iOS 寮�) */
   .incoming-call-actions{
     margin-top: auto;
     margin-bottom: calc(env(safe-area-inset-bottom) + clamp(14px, 5vh, 52px));
@@ -1772,10 +1778,10 @@
   .incoming-call-btn.decline svg{ transform: rotate(135deg); }
   .topbtn.call.active{ color: var(--accent); }
 
-  /* ── 长按气泡 · 复制菜单 (TG 式抬起+遮罩) ── */
-  /* 长按由我们接管 → 彻底屏蔽聊天区(#scroll)的系统选择/放大镜/callout,否则和我们的菜单打架。
-     用 !important 压过一切(含 iOS 误报 hover/pointer 的情况)。输入框在 #scroll 外,单独保持可选可编辑;
-     气泡里要复制文字走长按菜单的 Copy。 */
+  /* 鈹€鈹€ 闀挎寜姘旀场 路 澶嶅埗鑿滃崟 (TG 寮忔姮璧�+閬僵) 鈹€鈹€ */
+  /* 闀挎寜鐢辨垜浠帴绠� 鈫� 褰诲簳灞忚斀鑱婂ぉ鍖�(#scroll)鐨勭郴缁熼€夋嫨/鏀惧ぇ闀�/callout,鍚﹀垯鍜屾垜浠殑鑿滃崟鎵撴灦銆�
+     鐢� !important 鍘嬭繃涓€鍒�(鍚� iOS 璇姤 hover/pointer 鐨勬儏鍐�)銆傝緭鍏ユ鍦� #scroll 澶�,鍗曠嫭淇濇寔鍙€夊彲缂栬緫;
+     姘旀场閲岃澶嶅埗鏂囧瓧璧伴暱鎸夎彍鍗曠殑 Copy銆� */
   #scroll, #scroll *{
     -webkit-user-select:none !important; user-select:none !important;
     -webkit-touch-callout:none !important;
@@ -1821,9 +1827,9 @@
   .msg-act:hover{ background:var(--row-press); }
   .msg-act:active{ background:var(--row-press); transform:scale(.98); }
   .msg-act svg{ width:18px; height:18px; opacity:.82; flex:0 0 auto; }
-  .msg-act.danger{ color:#e05a4d; }                       /* 删除(仅本地) */
+  .msg-act.danger{ color:#e05a4d; }                       /* 鍒犻櫎(浠呮湰鍦�) */
 
-  /* ── reaction chips (AI poke) ── */
+  /* 鈹€鈹€ reaction chips (AI poke) 鈹€鈹€ */
   .row.has-reactions{ flex-direction:column; gap:5px; }
   .row.human.has-reactions{ align-items:flex-end; }
   .row.ai.has-reactions{ align-items:flex-start; }
@@ -1850,7 +1856,7 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
-    /* 通话声纹是"对方正在说话"的功能性反馈,即便系统减弱动态也保留(细窄低位移,不刺激) */
+    /* 閫氳瘽澹扮汗鏄�"瀵规柟姝ｅ湪璇磋瘽"鐨勫姛鑳芥€у弽棣�,鍗充究绯荤粺鍑忓急鍔ㄦ€佷篃淇濈暀(缁嗙獎浣庝綅绉�,涓嶅埡婵€) */
     .call-wave i{
       animation: callWave var(--dur, 1s) var(--ease-soft) var(--d, 0s) infinite alternate !important;
     }
@@ -1860,212 +1866,212 @@
 </head>
 <body>
 
-<!-- ── Login ── -->
+<!-- 鈹€鈹€ Login 鈹€鈹€ -->
 <div class="login" id="login">
   <div class="orb"></div>
   <h1>Claude</h1>
-  <p class="sub">输入连接密钥,进入你和Claude的频道。</p>
+  <p class="sub">杈撳叆杩炴帴瀵嗛挜,杩涘叆浣犲拰Claude鐨勯閬撱€�</p>
   <form id="loginForm" autocomplete="off">
-    <input id="secretInput" type="password" inputmode="text" placeholder="连接密钥" autocomplete="off" spellcheck="false">
-    <button type="submit">连接</button>
+    <input id="secretInput" type="password" inputmode="text" placeholder="杩炴帴瀵嗛挜" autocomplete="off" spellcheck="false">
+    <button type="submit">杩炴帴</button>
     <p class="err" id="loginErr"></p>
   </form>
 </div>
 
-<!-- ── App ── -->
+<!-- 鈹€鈹€ App 鈹€鈹€ -->
 <div class="wall" id="wall"></div>
 <div class="app hidden" id="app" data-conn="offline">
   <header class="topbar">
-    <button class="backbtn" id="backBtn" aria-label="返回主菜单">
+    <button class="backbtn" id="backBtn" aria-label="杩斿洖涓昏彍鍗�">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <button class="topbtn sessions" id="sessionBtn" type="button" aria-label="API 绐楀彛" title="API 绐楀彛">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="14" height="14" rx="3"/><path d="M8 3h9a4 4 0 0 1 4 4v9"/></svg>
     </button>
     <div class="peerpill">
       <span class="name" id="peerName">Claude</span>
-      <span class="status" id="status">connecting…</span>
+      <span class="status" id="status">connecting鈥�</span>
     </div>
-    <div class="header-actions" aria-label="通话和更多操作">
-      <button class="topbtn sessions" id="sessionBtn" type="button" aria-label="API 窗口" title="API 窗口">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="14" height="14" rx="3"/><path d="M8 3h9a4 4 0 0 1 4 4v9"/></svg>
-      </button>
-      <button class="topbtn terminal" id="terminalBtn" type="button" aria-label="终端视图" title="终端视图">
+    <div class="header-actions" aria-label="閫氳瘽鍜屾洿澶氭搷浣�">
+      <button class="topbtn terminal" id="terminalBtn" type="button" aria-label="缁堢瑙嗗浘" title="缁堢瑙嗗浘">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m6 8 4 4-4 4"/><path d="M12 16h6"/></svg>
       </button>
-      <button class="topbtn call" id="callBtn" type="button" aria-label="语音通话（占位）" title="语音通话">
+      <button class="topbtn call" id="callBtn" type="button" aria-label="璇煶閫氳瘽锛堝崰浣嶏級" title="璇煶閫氳瘽">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v2.4a2 2 0 0 1-2.2 2 19.4 19.4 0 0 1-8.4-3 19 19 0 0 1-5.9-5.9 19.4 19.4 0 0 1-3-8.4A2 2 0 0 1 4.5 2h2.4a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.4a15.6 15.6 0 0 0 6.6 6.6l1-1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 1.8z"/></svg>
       </button>
-      <button class="topbtn more" id="moreBtn" type="button" aria-label="个人信息" title="个人信息">
+      <button class="topbtn more" id="moreBtn" type="button" aria-label="涓汉淇℃伅" title="涓汉淇℃伅">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
       </button>
     </div>
-    <button class="avatar hidden" id="avatarBtn" aria-label="查看个人信息" title="个人信息"></button>
+    <button class="avatar hidden" id="avatarBtn" aria-label="鏌ョ湅涓汉淇℃伅" title="涓汉淇℃伅"></button>
   </header>
   <div class="session-pop" id="sessionPop" hidden>
     <div class="session-head">
-      <div class="session-title">API 窗口</div>
-      <button class="session-new" id="sessionNewBtn" type="button">新对话</button>
+      <div class="session-title">API 绐楀彛</div>
+      <button class="session-new" id="sessionNewBtn" type="button">鏂板璇�</button>
     </div>
     <div class="session-list" id="sessionList"></div>
   </div>
   <main class="scroll" id="scroll">
     <div class="empty" id="empty">
       <div class="orb"></div>
-      <p>这里只有你和Claude。<br>说点什么吧。</p>
+      <p>杩欓噷鍙湁浣犲拰Claude銆�<br>璇寸偣浠€涔堝惂銆�</p>
     </div>
   </main>
   <footer class="composer">
     <div class="field">
-      <button class="floatbtn clip-in-field" id="clipBtn" aria-label="附件" title="附件">
+      <button class="floatbtn clip-in-field" id="clipBtn" aria-label="闄勪欢" title="闄勪欢">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5l-8.8 8.8a5 5 0 0 1-7.1-7.1l8.8-8.8a3.3 3.3 0 0 1 4.7 4.7l-8.6 8.6a1.6 1.6 0 0 1-2.3-2.3l8-8"/></svg>
       </button>
       <input type="file" id="clipInput" multiple class="hidden" aria-hidden="true">
       <textarea id="input" rows="1" placeholder="Write a letter..." enterkeyhint="send"></textarea>
-      <button class="emojibtn" id="emojiBtn" aria-label="表情" title="表情">
+      <button class="emojibtn" id="emojiBtn" aria-label="琛ㄦ儏" title="琛ㄦ儏">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.3a4.2 4.2 0 0 0 7 0"/><line x1="9" y1="9.3" x2="9" y2="10"/><line x1="15" y1="9.3" x2="15" y2="10"/></svg>
       </button>
     </div>
-    <button class="floatbtn hidden" id="micBtn" aria-label="语音" title="语音">
+    <button class="floatbtn hidden" id="micBtn" aria-label="璇煶" title="璇煶">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21.5"/></svg>
     </button>
-    <button class="floatbtn send" id="sendBtn" aria-label="发送">
+    <button class="floatbtn send" id="sendBtn" aria-label="鍙戦€�">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M6.5 10.5L12 5l5.5 5.5"/></svg>
     </button>
   </footer>
-  <button class="newmsg-pill" id="newMsgBtn" type="button" aria-label="回到最新消息">
+  <button class="newmsg-pill" id="newMsgBtn" type="button" aria-label="鍥炲埌鏈€鏂版秷鎭�">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></svg>
-    <span>新消息</span>
+    <span>鏂版秷鎭�</span>
   </button>
 </div>
 
-<!-- ── Terminal renderer (same conversation, different skin) ── -->
-<section class="terminal-panel" id="terminalPanel" aria-label="终端视图" aria-hidden="true">
+<!-- 鈹€鈹€ Terminal renderer (same conversation, different skin) 鈹€鈹€ -->
+<section class="terminal-panel" id="terminalPanel" aria-label="缁堢瑙嗗浘" aria-hidden="true">
   <header class="terminal-top">
-    <button class="terminal-back" id="terminalBack" type="button" aria-label="返回聊天">
+    <button class="terminal-back" id="terminalBack" type="button" aria-label="杩斿洖鑱婂ぉ">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
     </button>
     <div class="terminal-title">
       <strong>companion terminal</strong>
-      <span id="terminalSession">same stream · current window</span>
+      <span id="terminalSession">same stream 路 current window</span>
     </div>
   </header>
   <main class="terminal-log" id="terminalLog" aria-live="polite"></main>
   <form class="terminal-form" id="terminalForm" autocomplete="off">
     <span class="terminal-prompt" aria-hidden="true">&gt;</span>
     <textarea class="terminal-input" id="terminalInput" rows="1" placeholder="type into the same conversation..." enterkeyhint="send" spellcheck="false"></textarea>
-    <button class="terminal-send" type="submit" aria-label="发送">
+    <button class="terminal-send" type="submit" aria-label="鍙戦€�">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M6.5 10.5 12 5l5.5 5.5"/></svg>
     </button>
   </form>
 </section>
 
-<!-- ── Profile (full-screen page) ── -->
+<!-- 鈹€鈹€ Profile (full-screen page) 鈹€鈹€ -->
 <div class="profile-panel hidden" id="profilePanel" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
   <div class="profile-page">
     <div class="profile-topbar">
-      <button class="profile-back" id="profileClose" type="button" aria-label="返回">
+      <button class="profile-back" id="profileClose" type="button" aria-label="杩斿洖">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
       </button>
-      <h2 id="profileTitle" class="hidden">个人信息</h2>
+      <h2 id="profileTitle" class="hidden">涓汉淇℃伅</h2>
     </div>
     <div class="profile-scroll">
       <!-- identity -->
       <div class="profile-identity">
-        <button class="profile-avatar" id="profileAvatarBtn" type="button" aria-label="更改头像"></button>
+        <button class="profile-avatar" id="profileAvatarBtn" type="button" aria-label="鏇存敼澶村儚"></button>
         <div class="profile-id-copy">
           <div class="profile-name-row">
             <h3 id="profileName">Claude</h3>
             <input id="profileNameInput" class="hidden" type="text" maxlength="16" autocomplete="off" spellcheck="false" placeholder="Claude">
-            <button class="profile-name-edit" id="profileNameEdit" type="button" aria-label="编辑备注">
+            <button class="profile-name-edit" id="profileNameEdit" type="button" aria-label="缂栬緫澶囨敞">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
             </button>
           </div>
           <p class="profile-handle"><span>@companion</span></p>
-          <p class="profile-bio">随时在这里，陪你聊聊。</p>
+          <p class="profile-bio">闅忔椂鍦ㄨ繖閲岋紝闄綘鑱婅亰銆�</p>
         </div>
       </div>
 
-      <!-- 主题切换 -->
+      <!-- 涓婚鍒囨崲 -->
       <section class="settings-card">
-        <div class="settings-label">主题</div>
-        <div class="segmented" id="themeSeg" role="group" aria-label="主题切换">
-          <button type="button" data-val="light">珍珠</button>
-          <button type="button" data-val="harbor">海港</button>
+        <div class="settings-label">涓婚</div>
+        <div class="segmented" id="themeSeg" role="group" aria-label="涓婚鍒囨崲">
+          <button type="button" data-val="light">鐝嶇彔</button>
+          <button type="button" data-val="harbor">娴锋腐</button>
         </div>
       </section>
 
-      <!-- 锁屏通知 -->
+      <!-- 閿佸睆閫氱煡 -->
       <section class="settings-card">
-        <div class="settings-label">锁屏通知 <i class="info-i" title="Claude发消息、而你没在看时，推送到手机锁屏">i</i></div>
-        <div class="segmented" id="pushSeg" role="group" aria-label="锁屏通知开关">
-          <button type="button" data-val="off">关</button>
-          <button type="button" data-val="on">开</button>
+        <div class="settings-label">閿佸睆閫氱煡 <i class="info-i" title="Claude鍙戞秷鎭€佽€屼綘娌″湪鐪嬫椂锛屾帹閫佸埌鎵嬫満閿佸睆">i</i></div>
+        <div class="segmented" id="pushSeg" role="group" aria-label="閿佸睆閫氱煡寮€鍏�">
+          <button type="button" data-val="off">鍏�</button>
+          <button type="button" data-val="on">寮€</button>
         </div>
         <div class="push-hint" id="pushHint"></div>
       </section>
 
       <!-- AI body routing -->
       <section class="settings-card">
-        <div class="settings-label">联系 Claude <i class="info-i" title="Desktop＝Claude Code channel；API＝服务器上的 OpenAI-compatible loop。同一时刻只让一个身体接消息，避免双答。">i</i></div>
-        <div class="segmented" id="brainSeg" role="group" aria-label="联系方式">
+        <div class="settings-label">鑱旂郴 Claude <i class="info-i" title="Desktop锛滳laude Code channel锛汚PI锛濇湇鍔″櫒涓婄殑 OpenAI-compatible loop銆傚悓涓€鏃跺埢鍙涓€涓韩浣撴帴娑堟伅锛岄伩鍏嶅弻绛斻€�">i</i></div>
+        <div class="segmented" id="brainSeg" role="group" aria-label="鑱旂郴鏂瑰紡">
           <button type="button" data-val="desktop">Desktop</button>
           <button type="button" data-val="loop">API</button>
         </div>
         <div class="push-hint" id="brainHint"></div>
       </section>
 
-      <!-- API loop · 模型链 -->
+      <!-- API loop 路 妯″瀷閾� -->
       <section class="settings-card loop-card">
-        <div class="settings-label">API · 模型 <i class="info-i" title="OpenAI-compatible 端点。第一行是主模型，后面是兜底链：主模型 401/403/429/5xx 时自动往下切。key 只在保存时上传，回显永远打码。">i</i></div>
+        <div class="settings-label">API 路 妯″瀷 <i class="info-i" title="OpenAI-compatible 绔偣銆傜涓€琛屾槸涓绘ā鍨嬶紝鍚庨潰鏄厹搴曢摼锛氫富妯″瀷 401/403/429/5xx 鏃惰嚜鍔ㄥ線涓嬪垏銆俴ey 鍙湪淇濆瓨鏃朵笂浼狅紝鍥炴樉姘歌繙鎵撶爜銆�">i</i></div>
         <div class="loop-rows" id="loopChainRows"></div>
         <div class="loop-actions">
-          <button type="button" class="loop-btn" id="loopChainAdd">+ 添加一行</button>
-          <button type="button" class="loop-btn primary" id="loopChainSave">保存</button>
-          <button type="button" class="loop-btn" id="loopChainTest">保存并测试</button>
+          <button type="button" class="loop-btn" id="loopChainAdd">+ 娣诲姞涓€琛�</button>
+          <button type="button" class="loop-btn primary" id="loopChainSave">淇濆瓨</button>
+          <button type="button" class="loop-btn" id="loopChainTest">淇濆瓨骞舵祴璇�</button>
         </div>
         <div class="push-hint" id="loopChainHint"></div>
       </section>
 
-      <!-- API loop · 上文 / 工具步数 -->
+      <!-- API loop 路 涓婃枃 / 宸ュ叿姝ユ暟 -->
       <section class="settings-card loop-card">
-        <div class="settings-label">API · 上文与工具 <i class="info-i" title="上文条数：每条消息喂给模型的同窗口历史条数。历史图片：其中最近几张图重新发像素（其余只留文件名）。工具步数：一条消息里最多连续调用工具的轮数。看图：关掉则图片只以文件名出现。">i</i></div>
+        <div class="settings-label">API 路 涓婃枃涓庡伐鍏� <i class="info-i" title="涓婃枃鏉℃暟锛氭瘡鏉℃秷鎭杺缁欐ā鍨嬬殑鍚岀獥鍙ｅ巻鍙叉潯鏁般€傚巻鍙插浘鐗囷細鍏朵腑鏈€杩戝嚑寮犲浘閲嶆柊鍙戝儚绱狅紙鍏朵綑鍙暀鏂囦欢鍚嶏級銆傚伐鍏锋鏁帮細涓€鏉℃秷鎭噷鏈€澶氳繛缁皟鐢ㄥ伐鍏风殑杞暟銆傜湅鍥撅細鍏虫帀鍒欏浘鐗囧彧浠ユ枃浠跺悕鍑虹幇銆�">i</i></div>
         <div class="loop-grid">
-          <label class="loop-field"><span>上文条数</span><input id="loopHistoryN" type="number" min="0" max="200" inputmode="numeric"></label>
-          <label class="loop-field"><span>历史图片</span><input id="loopHistoryImages" type="number" min="0" max="20" inputmode="numeric"></label>
-          <label class="loop-field"><span>工具步数</span><input id="loopToolSteps" type="number" min="0" max="50" inputmode="numeric"></label>
-          <label class="loop-field"><span>看图</span><select id="loopVision"><option value="auto">自动</option><option value="on">开</option><option value="off">关</option></select></label>
+          <label class="loop-field"><span>涓婃枃鏉℃暟</span><input id="loopHistoryN" type="number" min="0" max="200" inputmode="numeric"></label>
+          <label class="loop-field"><span>鍘嗗彶鍥剧墖</span><input id="loopHistoryImages" type="number" min="0" max="20" inputmode="numeric"></label>
+          <label class="loop-field"><span>宸ュ叿姝ユ暟</span><input id="loopToolSteps" type="number" min="0" max="50" inputmode="numeric"></label>
+          <label class="loop-field"><span>鐪嬪浘</span><select id="loopVision"><option value="auto">鑷姩</option><option value="on">寮€</option><option value="off">鍏�</option></select></label>
         </div>
-        <div class="loop-actions"><button type="button" class="loop-btn primary" id="loopContextSave">保存</button></div>
+        <div class="loop-actions"><button type="button" class="loop-btn primary" id="loopContextSave">淇濆瓨</button></div>
         <div class="push-hint" id="loopContextHint"></div>
       </section>
 
-      <!-- API loop · 人格设定 -->
+      <!-- API loop 路 浜烘牸璁惧畾 -->
       <section class="settings-card loop-card">
-        <div class="settings-label">API · 人格设定 <i class="info-i" title="模型的 system prompt。保存即生效，下一条消息就用新的；直接改服务器上的文件也会被热加载，不用重启。">i</i></div>
-        <textarea id="loopPersona" class="loop-textarea" rows="8" spellcheck="false" placeholder="写给模型的人设……"></textarea>
-        <div class="loop-actions"><button type="button" class="loop-btn primary" id="loopPersonaSave">保存并热加载</button></div>
+        <div class="settings-label">API 路 浜烘牸璁惧畾 <i class="info-i" title="妯″瀷鐨� system prompt銆備繚瀛樺嵆鐢熸晥锛屼笅涓€鏉℃秷鎭氨鐢ㄦ柊鐨勶紱鐩存帴鏀规湇鍔″櫒涓婄殑鏂囦欢涔熶細琚儹鍔犺浇锛屼笉鐢ㄩ噸鍚€�">i</i></div>
+        <textarea id="loopPersona" class="loop-textarea" rows="8" spellcheck="false" placeholder="鍐欑粰妯″瀷鐨勪汉璁锯€︹€�"></textarea>
+        <div class="loop-actions"><button type="button" class="loop-btn primary" id="loopPersonaSave">淇濆瓨骞剁儹鍔犺浇</button></div>
         <div class="push-hint" id="loopPersonaHint"></div>
       </section>
 
-      <!-- API loop · MCP -->
+      <!-- API loop 路 MCP -->
       <section class="settings-card loop-card">
-        <div class="settings-label">API · MCP 工具 <i class="info-i" title="连上的 MCP server 的工具会作为 function calling 交给模型，多步调用自动循环。stdio：服务器上的本机命令；http：streamable-http 地址。">i</i></div>
+        <div class="settings-label">API 路 MCP 宸ュ叿 <i class="info-i" title="杩炰笂鐨� MCP server 鐨勫伐鍏蜂細浣滀负 function calling 浜ょ粰妯″瀷锛屽姝ヨ皟鐢ㄨ嚜鍔ㄥ惊鐜€俿tdio锛氭湇鍔″櫒涓婄殑鏈満鍛戒护锛沨ttp锛歴treamable-http 鍦板潃銆�">i</i></div>
         <div class="loop-rows" id="loopMcpList"></div>
         <div class="loop-grid loop-mcp-form">
-          <label class="loop-field"><span>名字</span><input id="loopMcpName" type="text" placeholder="demo" autocapitalize="off" autocomplete="off"></label>
-          <label class="loop-field"><span>类型</span><select id="loopMcpTransport"><option value="stdio">stdio</option><option value="http">http</option></select></label>
-          <label class="loop-field loop-mcp-stdio wide"><span>命令</span><input id="loopMcpCommand" type="text" placeholder="python3" autocapitalize="off" autocomplete="off"></label>
-          <label class="loop-field loop-mcp-stdio wide"><span>参数（空格分隔）</span><input id="loopMcpArgs" type="text" placeholder="mcp_demo_server.py" autocapitalize="off" autocomplete="off"></label>
-          <label class="loop-field loop-mcp-stdio wide"><span>env（JSON，可空）</span><input id="loopMcpEnv" type="text" placeholder='{"API_KEY":"..."}' autocapitalize="off" autocomplete="off"></label>
+          <label class="loop-field"><span>鍚嶅瓧</span><input id="loopMcpName" type="text" placeholder="demo" autocapitalize="off" autocomplete="off"></label>
+          <label class="loop-field"><span>绫诲瀷</span><select id="loopMcpTransport"><option value="stdio">stdio</option><option value="http">http</option></select></label>
+          <label class="loop-field loop-mcp-stdio wide"><span>鍛戒护</span><input id="loopMcpCommand" type="text" placeholder="python3" autocapitalize="off" autocomplete="off"></label>
+          <label class="loop-field loop-mcp-stdio wide"><span>鍙傛暟锛堢┖鏍煎垎闅旓級</span><input id="loopMcpArgs" type="text" placeholder="mcp_demo_server.py" autocapitalize="off" autocomplete="off"></label>
+          <label class="loop-field loop-mcp-stdio wide"><span>env锛圝SON锛屽彲绌猴級</span><input id="loopMcpEnv" type="text" placeholder='{"API_KEY":"..."}' autocapitalize="off" autocomplete="off"></label>
           <label class="loop-field loop-mcp-http wide hidden"><span>URL</span><input id="loopMcpUrl" type="url" placeholder="https://host/mcp" autocapitalize="off" autocomplete="off"></label>
-          <label class="loop-field loop-mcp-http wide hidden"><span>headers（JSON，可空）</span><input id="loopMcpHeaders" type="text" placeholder='{"Authorization":"Bearer ..."}' autocapitalize="off" autocomplete="off"></label>
+          <label class="loop-field loop-mcp-http wide hidden"><span>headers锛圝SON锛屽彲绌猴級</span><input id="loopMcpHeaders" type="text" placeholder='{"Authorization":"Bearer ..."}' autocapitalize="off" autocomplete="off"></label>
         </div>
-        <div class="loop-actions"><button type="button" class="loop-btn primary" id="loopMcpAdd">添加 / 更新并连接</button></div>
+        <div class="loop-actions"><button type="button" class="loop-btn primary" id="loopMcpAdd">娣诲姞 / 鏇存柊骞惰繛鎺�</button></div>
         <div class="push-hint" id="loopMcpHint"></div>
       </section>
 
-      <!-- 模型选择（占位 · 假按键，以后接真切换）-->
+      <!-- 妯″瀷閫夋嫨锛堝崰浣� 路 鍋囨寜閿紝浠ュ悗鎺ョ湡鍒囨崲锛�-->
       <section class="settings-card">
-        <div class="settings-label">模型选择</div>
-        <div class="segmented" id="modelSeg" role="group" aria-label="模型选择">
+        <div class="settings-label">妯″瀷閫夋嫨</div>
+        <div class="segmented" id="modelSeg" role="group" aria-label="妯″瀷閫夋嫨">
           <button type="button" data-val="Opus 4.6">Opus 4.6</button>
           <button type="button" data-val="Opus 4.7" class="active">Opus 4.7</button>
           <button type="button" data-val="Opus 4.8">Opus 4.8</button>
@@ -2073,9 +2079,9 @@
         </div>
       </section>
 
-      <!-- effort（占位 · 假按键）-->
+      <!-- effort锛堝崰浣� 路 鍋囨寜閿級-->
       <section class="settings-card">
-        <div class="settings-label">effort <i class="info-i" title="推理强度：越高越细，耗时越长">i</i></div>
+        <div class="settings-label">effort <i class="info-i" title="鎺ㄧ悊寮哄害锛氳秺楂樿秺缁嗭紝鑰楁椂瓒婇暱">i</i></div>
         <div class="segmented" id="effortSeg" role="group" aria-label="effort">
           <button type="button" data-val="low">low</button>
           <button type="button" data-val="medium">medium</button>
@@ -2085,35 +2091,35 @@
         </div>
       </section>
 
-      <!-- 上下文阈值（占位 · 假按键）-->
+      <!-- 涓婁笅鏂囬槇鍊硷紙鍗犱綅 路 鍋囨寜閿級-->
       <section class="settings-card">
-        <div class="settings-label">上下文阈值 <i class="info-i" title="上下文阈值：保留多少 / 满多少触发">i</i></div>
+        <div class="settings-label">涓婁笅鏂囬槇鍊� <i class="info-i" title="涓婁笅鏂囬槇鍊硷細淇濈暀澶氬皯 / 婊″灏戣Е鍙�">i</i></div>
         <div class="context-slider-wrap">
-          <input class="context-slider" id="contextSlider" type="range" min="0" max="100" value="40" aria-label="上下文阈值">
-          <div class="context-scale"><span>保留60k</span><span>满200k触发</span></div>
+          <input class="context-slider" id="contextSlider" type="range" min="0" max="100" value="40" aria-label="涓婁笅鏂囬槇鍊�">
+          <div class="context-scale"><span>淇濈暀60k</span><span>婊�200k瑙﹀彂</span></div>
         </div>
       </section>
 
-      <!-- reset（占位 · 假按键）-->
+      <!-- reset锛堝崰浣� 路 鍋囨寜閿級-->
       <button class="action-row" id="resetRow" type="button">
         <span class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3v5h5"/></svg></span>
         <span class="action-name">reset</span>
-        <span class="action-value">点击后开启新窗口</span>
+        <span class="action-value">鐐瑰嚮鍚庡紑鍚柊绐楀彛</span>
         <span class="action-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
       </button>
 
-      <!-- swap（占位 · 假按键）-->
+      <!-- swap锛堝崰浣� 路 鍋囨寜閿級-->
       <button class="action-row" id="swapRow" type="button">
         <span class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4 3 8l4 4"/><path d="M3 8h13a4 4 0 0 1 4 4"/><path d="m17 20 4-4-4-4"/><path d="M21 16H8a4 4 0 0 1-4-4"/></svg></span>
         <span class="action-name">swap</span>
-        <span class="action-value">切换至上一个 resume</span>
+        <span class="action-value">鍒囨崲鑷充笂涓€涓� resume</span>
         <span class="action-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
       </button>
 
       <button class="action-row hidden" id="resumeRow" type="button">
         <span class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 13.7-5.7"/><path d="M18 3v4h-4"/><path d="M20 12a8 8 0 0 1-13.7 5.7"/><path d="M6 21v-4h4"/></svg></span>
         <span class="action-name">resume</span>
-        <span class="action-value">继续 pending task</span>
+        <span class="action-value">缁х画 pending task</span>
         <span class="action-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
       </button>
 
@@ -2123,8 +2129,8 @@
         <span class="action-name">status</span>
         <span class="status-main">
           <span class="status-used" id="statusUsed">used 96k / 200k</span>
-          <span class="status-sid"><span id="statusSid">sid: a9f3…</span>
-            <button class="status-copy" id="statusCopy" type="button" aria-label="复制 sid">
+          <span class="status-sid"><span id="statusSid">sid: a9f3鈥�</span>
+            <button class="status-copy" id="statusCopy" type="button" aria-label="澶嶅埗 sid">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.4"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>
             </button>
           </span>
@@ -2135,8 +2141,8 @@
   </div>
 </div>
 
-<!-- ── Menu (hub / 主菜单页 · 聊天页左箭头进入) ── -->
-<div class="menu-panel hidden" id="menuPanel" role="dialog" aria-modal="true" aria-label="主菜单">
+<!-- 鈹€鈹€ Menu (hub / 涓昏彍鍗曢〉 路 鑱婂ぉ椤靛乏绠ご杩涘叆) 鈹€鈹€ -->
+<div class="menu-panel hidden" id="menuPanel" role="dialog" aria-modal="true" aria-label="涓昏彍鍗�">
   <div class="menu-page">
     <div class="menu-scroll">
       <!-- header -->
@@ -2153,7 +2159,7 @@
       </div>
 
       <!-- list -->
-      <nav class="menu-list" aria-label="主菜单">
+      <nav class="menu-list" aria-label="涓昏彍鍗�">
         <button class="menu-item" type="button" data-menu="chat">
           <span class="menu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg></span>
           <span class="menu-dot"></span>
@@ -2198,16 +2204,16 @@
   </div>
 </div>
 
-<!-- ── Voice call (speaking overlay · 假按键,纯 UI) ── -->
+<!-- 鈹€鈹€ Voice call (speaking overlay 路 鍋囨寜閿�,绾� UI) 鈹€鈹€ -->
 <div class="call-overlay hidden" id="callOverlay" aria-hidden="true">
   <div class="call-mini" id="callMini">
     <span class="call-mini-dot"></span>
-    <span>通话中</span>
+    <span>閫氳瘽涓�</span>
     <span class="call-mini-timer" id="callMiniTimer">00:00</span>
   </div>
   <div class="call-scrim" id="callScrim"></div>
-  <div class="call-sheet" role="dialog" aria-modal="true" aria-label="语音通话">
-    <button class="call-minimize-top" id="callMinimize" type="button" aria-label="收起">
+  <div class="call-sheet" role="dialog" aria-modal="true" aria-label="璇煶閫氳瘽">
+    <button class="call-minimize-top" id="callMinimize" type="button" aria-label="鏀惰捣">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="call-avatar-stage">
@@ -2225,70 +2231,70 @@
     </div>
     <div class="call-timer" id="callTimer">00:00</div>
     <div class="call-quote" id="callQuote">
-      <span class="call-quote-mark">“</span>
+      <span class="call-quote-mark">鈥�</span>
       <span class="call-quote-text" id="callQuoteText"></span>
-      <span class="call-quote-mark">”</span>
+      <span class="call-quote-mark">鈥�</span>
     </div>
     <div class="call-transcript-section">
       <div class="call-transcript-label">
-        <span class="call-transcript-cap">实时字幕 · live transcript</span>
+        <span class="call-transcript-cap">瀹炴椂瀛楀箷 路 live transcript</span>
       </div>
       <div class="call-transcript-bar" id="callTranscript" aria-live="polite"></div>
     </div>
     <div class="call-controls">
       <button class="call-ctrl-btn" id="callMuteBtn" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.75" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><line x1="12" y1="17.5" x2="12" y2="21"/><line x1="8.5" y1="21" x2="15.5" y2="21"/><line x1="3.8" y1="3" x2="20.2" y2="20.4" class="mute-slash"/></svg>
-        <span>静音</span>
+        <span>闈欓煶</span>
       </button>
       <button class="call-ctrl-btn" id="callPrivateBtn" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.25" width="15" height="10.25" rx="3.2"/><path d="M8 10.25V7.5a4 4 0 0 1 8 0v2.75"/><circle cx="12" cy="14.7" r="1.45" fill="currentColor" stroke="none"/><line x1="12" y1="15.7" x2="12" y2="17.4"/></svg>
-        <span>私密模式</span>
+        <span>绉佸瘑妯″紡</span>
       </button>
       <button class="call-ctrl-btn" id="callSpeakerBtn" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.2h3.3L12 5v14l-4.7-4.2H4z" fill="currentColor" stroke-width="1.2"/><path d="M15.6 9.2a4 4 0 0 1 0 5.6"/><path d="M18.2 6.6a7.5 7.5 0 0 1 0 10.8"/></svg>
-        <span>扬声器</span>
+        <span>鎵０鍣�</span>
       </button>
     </div>
-    <button class="call-hangup" id="callHangup" type="button" aria-label="挂断">
+    <button class="call-hangup" id="callHangup" type="button" aria-label="鎸傛柇">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.996.996 0 0 0-1.01.24l-1.57 1.97a15.045 15.045 0 0 1-6.59-6.59l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
     </button>
   </div>
 </div>
 
-<!-- ── Incoming call (requires user gesture before opening audio) ── -->
+<!-- 鈹€鈹€ Incoming call (requires user gesture before opening audio) 鈹€鈹€ -->
 <div class="call-overlay incoming-call-overlay hidden" id="incomingCallOverlay" aria-hidden="true">
   <div class="call-scrim" id="incomingCallScrim"></div>
-  <div class="call-sheet" role="dialog" aria-modal="true" aria-label="来电">
+  <div class="call-sheet" role="dialog" aria-modal="true" aria-label="鏉ョ數">
     <div class="call-caption" aria-hidden="true">
       <span class="call-star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c.8 5 3.5 7.7 8.5 8.5-5 .8-7.7 3.5-8.5 8.5-.8-5-3.5-7.7-8.5-8.5 5-.8 7.7-3.5 8.5-8.5Z"/></svg></span>
       <span>incoming call</span>
       <span class="call-star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c.8 5 3.5 7.7 8.5 8.5-5 .8-7.7 3.5-8.5 8.5-.8-5-3.5-7.7-8.5-8.5 5-.8 7.7-3.5 8.5-8.5Z"/></svg></span>
     </div>
     <div class="incoming-call-avatar" role="img" aria-label="Claude"></div>
-    <div class="incoming-call-title">Claude来电</div>
-    <div class="incoming-call-text" id="incomingCallText">Claude想和你语音通话。</div>
+    <div class="incoming-call-title">Claude鏉ョ數</div>
+    <div class="incoming-call-text" id="incomingCallText">Claude鎯冲拰浣犺闊抽€氳瘽銆�</div>
     <div class="incoming-call-actions">
       <div class="incoming-call-slot">
-        <button class="incoming-call-btn decline" id="incomingCallDecline" type="button" aria-label="拒绝">
+        <button class="incoming-call-btn decline" id="incomingCallDecline" type="button" aria-label="鎷掔粷">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.996.996 0 0 0-1.01.24l-1.57 1.97a15.045 15.045 0 0 1-6.59-6.59l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
         </button>
-        <span class="incoming-call-label">拒绝</span>
+        <span class="incoming-call-label">鎷掔粷</span>
       </div>
       <div class="incoming-call-slot">
-        <button class="incoming-call-btn accept" id="incomingCallAccept" type="button" aria-label="接听">
+        <button class="incoming-call-btn accept" id="incomingCallAccept" type="button" aria-label="鎺ュ惉">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
         </button>
-        <span class="incoming-call-label">接听</span>
+        <span class="incoming-call-label">鎺ュ惉</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ── 长按气泡 · 复制菜单 (clone 抬起 + 遮罩 + 动作条) ── -->
+<!-- 鈹€鈹€ 闀挎寜姘旀场 路 澶嶅埗鑿滃崟 (clone 鎶捣 + 閬僵 + 鍔ㄤ綔鏉�) 鈹€鈹€ -->
 <div class="msg-menu" id="msgMenu" aria-hidden="true">
   <div class="msg-menu-scrim" id="msgMenuScrim"></div>
-  <!-- 抬起的气泡克隆由 JS 插在这里 -->
-  <div class="msg-menu-actions" id="msgMenuActions" role="menu" aria-label="消息操作">
+  <!-- 鎶捣鐨勬皵娉″厠闅嗙敱 JS 鎻掑湪杩欓噷 -->
+  <div class="msg-menu-actions" id="msgMenuActions" role="menu" aria-label="娑堟伅鎿嶄綔">
     <button class="msg-act" type="button" data-act="copy" role="menuitem">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
       <span>Copy</span>
@@ -2301,18 +2307,18 @@
 </div>
 
 <script>
-/* ════════════════════════════════════════════════════════════════
-   Tidal Echo — PWA chat shell (open source)
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲
+   Tidal Echo 鈥� PWA chat shell (open source)
    A private 1:1 chat front-end for a person and their AI companion,
    talking to a self-hosted relay backend. No domain or secret is baked in.
-   Backend contract: GET /app/history · SSE /app/stream · POST /app/send · /healthz
-   ════════════════════════════════════════════════════════════════ */
+   Backend contract: GET /app/history 路 SSE /app/stream 路 POST /app/send 路 /healthz
+   鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 
-/* ── identity / branding — the ONE place to set names + app title ── */
+/* 鈹€鈹€ identity / branding 鈥� the ONE place to set names + app title 鈹€鈹€ */
 const CONFIG = {
   APP_NAME:   "Tidal Echo",  // app + menu title (and manifest, set there too)
   AI_NAME:    "Claude",       // your AI companion's display name (header / call / push / narration)
-  HUMAN_NAME: "你",           // how you're referred to in narration (rarely shown)
+  HUMAN_NAME: "浣�",           // how you're referred to in narration (rarely shown)
   SINCE:      "2026/01/01",   // "together since" date YYYY/MM/DD for the menu counter ("" hides it)
 };
 const AI_NAME = CONFIG.AI_NAME, HUMAN_NAME = CONFIG.HUMAN_NAME, APP_NAME = CONFIG.APP_NAME;
@@ -2321,11 +2327,11 @@ const API_BASE = "https://tidal-echo-3128.vercel.app";     // same-origin; nginx
 const USE_MOCK  = false;          // true = self-contained demo with fake data (no backend needed)
 const LS_KEY    = "companion_secret";
 
-/* ── 状态 ── */
+/* 鈹€鈹€ 鐘舵€� 鈹€鈹€ */
 let secret  = localStorage.getItem(LS_KEY);
 let lastId  = 0;
 const seen  = new Set();
-let es      = null;     // EventSource(或 MockEventSource)
+let es      = null;     // EventSource(鎴� MockEventSource)
 let connected = false;
 let healthTimer = null;
 let streamWatchTimer = null;
@@ -2337,7 +2343,7 @@ const BACKFILL_MS = 20000;
 const STREAM_FLUSH_MS = 80;
 let typingTimer = null;
 let typingActive = false;
-const freshKeys = new Set();   // 刚发/刚收到、待播一次入场动画的消息 key
+const freshKeys = new Set();   // 鍒氬彂/鍒氭敹鍒般€佸緟鎾竴娆″叆鍦哄姩鐢荤殑娑堟伅 key
 const freshReactionKeys = new Set();   // messages whose AI reaction just arrived, pending a one-shot pop
 const streamDrafts = new Map();        // stream_id+kind -> temporary bubble key
 const streamDeltaBuffers = new Map();  // stream_id+kind -> batched delta
@@ -2349,14 +2355,14 @@ function persistDeletedKeys(){
   try{ localStorage.setItem("companion_deleted_ids", JSON.stringify(Array.from(deletedKeys).slice(-5000))); }catch(_){}
 }
 
-/* ── DOM ── */
+/* 鈹€鈹€ DOM 鈹€鈹€ */
 const $ = (s) => document.querySelector(s);
 const loginEl = $("#login"), appEl = $("#app");
 const scrollEl = $("#scroll"), emptyEl = $("#empty");
 const statusEl = $("#status"), inputEl = $("#input"), sendBtn = $("#sendBtn"), newMsgBtn = $("#newMsgBtn");
 const micBtn = $("#micBtn"), clipBtn = $("#clipBtn"), avatarBtn = $("#avatarBtn");
 const clipInput = $("#clipInput");
-const localPreview = new Map();   // serverUrl -> blob: 本地预览，避免上传后重新下载闪烁
+const localPreview = new Map();   // serverUrl -> blob: 鏈湴棰勮锛岄伩鍏嶄笂浼犲悗閲嶆柊涓嬭浇闂儊
 const avatarInput = $("#avatarInput"), wallEl = $("#wall");
 const peerNameEl = $("#peerName"), profilePanel = $("#profilePanel");
 const profileClose = $("#profileClose"), moreBtn = $("#moreBtn");
@@ -2369,7 +2375,7 @@ const sessionBtn = $("#sessionBtn"), sessionPop = $("#sessionPop"), sessionList 
 const terminalBtn = $("#terminalBtn"), terminalPanel = $("#terminalPanel"), terminalBack = $("#terminalBack"), terminalLog = $("#terminalLog"), terminalForm = $("#terminalForm"), terminalInput = $("#terminalInput"), terminalSession = $("#terminalSession");
 const brainSeg = $("#brainSeg"), brainHint = $("#brainHint");
 
-/* ════════ 固定聊天背景 + 本地头像 ════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲 鍥哄畾鑱婂ぉ鑳屾櫙 + 鏈湴澶村儚 鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 const THEMES = ["light","harbor"];
 const WALLS = { light: "chat-light.webp", harbor: "chat-harbor.webp" };
 const AVATAR_KEY = "companion_avatar";
@@ -2425,7 +2431,7 @@ function applyWall(url){
   img.src = url;
 }
 function applyAvatar(url){
-  // 写 CSS 变量 → 顶栏头像、聊天每条消息旁的头像、空状态/登录 orb、profile 大头像一起换
+  // 鍐� CSS 鍙橀噺 鈫� 椤舵爮澶村儚銆佽亰澶╂瘡鏉℃秷鎭梺鐨勫ご鍍忋€佺┖鐘舵€�/鐧诲綍 orb銆乸rofile 澶уご鍍忎竴璧锋崲
   const val = url ? `url("${url}")` : 'url("avatar-sea.png")';
   document.documentElement.style.setProperty("--avatar-default", val);
 }
@@ -2434,18 +2440,18 @@ function applyRemark(value){
   if (peerNameEl) peerNameEl.textContent = name;
   if (profileNameEl) profileNameEl.textContent = name;
 }
-/* Push CONFIG names/branding onto every static UI surface — names live in one place. */
+/* Push CONFIG names/branding onto every static UI surface 鈥� names live in one place. */
 function applyIdentity(){
   try{ document.title = APP_NAME; }catch(_){}
   const setText = (sel, val) => { const el = document.querySelector(sel); if (el) el.textContent = val; };
   const setAttr = (sel, a, val) => { const el = document.querySelector(sel); if (el) el.setAttribute(a, val); };
   setText(".login h1", AI_NAME);
-  setText(".login .sub", "输入连接密钥，进入你和" + AI_NAME + "的频道。");
-  const emp = document.querySelector("#empty p"); if (emp) emp.innerHTML = "这里只有你和" + AI_NAME + "。<br>说点什么吧。";
+  setText(".login .sub", "杈撳叆杩炴帴瀵嗛挜锛岃繘鍏ヤ綘鍜�" + AI_NAME + "鐨勯閬撱€�");
+  const emp = document.querySelector("#empty p"); if (emp) emp.innerHTML = "杩欓噷鍙湁浣犲拰" + AI_NAME + "銆�<br>璇寸偣浠€涔堝惂銆�";
   setText(".call-name", AI_NAME);
   setAttr("#callAvatarImg", "aria-label", AI_NAME);
-  setText(".incoming-call-title", AI_NAME + "来电");
-  setText("#incomingCallText", AI_NAME + "想和你语音通话。");
+  setText(".incoming-call-title", AI_NAME + "鏉ョ數");
+  setText("#incomingCallText", AI_NAME + "鎯冲拰浣犺闊抽€氳瘽銆�");
   setAttr(".incoming-call-avatar", "aria-label", AI_NAME);
   setText(".menu-title", APP_NAME);
   const since = document.querySelector(".menu-since");
@@ -2476,7 +2482,7 @@ applyIdentity();
 applyWall(currentWall());
 applyAvatar(localStorage.getItem(AVATAR_KEY));
 applyRemark(localStorage.getItem(REMARK_KEY));
-/* 主题只由日夜 toggle 控制(持久化),不再实时跟随系统;首次打开的初始值由 <head> 早期脚本取一次系统值 */
+/* 涓婚鍙敱鏃ュ toggle 鎺у埗(鎸佷箙鍖�),涓嶅啀瀹炴椂璺熼殢绯荤粺;棣栨鎵撳紑鐨勫垵濮嬪€肩敱 <head> 鏃╂湡鑴氭湰鍙栦竴娆＄郴缁熷€� */
 if (avatarBtn) avatarBtn.addEventListener("click", openProfile);
 if (moreBtn) moreBtn.addEventListener("click", openProfile);
 if (profileAvatarBtn) profileAvatarBtn.addEventListener("click", () => avatarInput && avatarInput.click());
@@ -2485,12 +2491,12 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && profilePanel && !profilePanel.classList.contains("hidden")) closeProfile();
 });
 
-/* ── Main menu (hub · entered from the chat back-arrow). Chat returns to chat. ── */
+/* 鈹€鈹€ Main menu (hub 路 entered from the chat back-arrow). Chat returns to chat. 鈹€鈹€ */
 const backBtn = $("#backBtn");
 const menuPanel = $("#menuPanel"), menuDaysEl = $("#menuDays");
 const TOGETHER_START = (function(){
   const m = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/.exec(CONFIG.SINCE || "");
-  return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;   // null → counter hidden
+  return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;   // null 鈫� counter hidden
 })();
 function daysTogether(){
   if (!TOGETHER_START) return 0;
@@ -2525,7 +2531,7 @@ if (menuPanel){
     if (!item) return;
     if (item.dataset.menu === "chat") closeMenu();       // back to chat
     else if (item.dataset.menu === "album") location.assign("album.html");  // album shell (wire your own backend)
-    else showToast("即将开放");                           // placeholder items
+    else showToast("鍗冲皢寮€鏀�");                           // placeholder items
   });
 }
 document.addEventListener("keydown", (e) => {
@@ -2533,7 +2539,7 @@ document.addEventListener("keydown", (e) => {
 });
 document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshDays(); });
 
-/* 设置页 #themeSeg 分段控件 — 手动切 5 套主题,持久化,联动壁纸/theme-color */
+/* 璁剧疆椤� #themeSeg 鍒嗘鎺т欢 鈥� 鎵嬪姩鍒� 5 濂椾富棰�,鎸佷箙鍖�,鑱斿姩澹佺焊/theme-color */
 const THEME_KEY = "companion_theme";
 const themeSeg = $("#themeSeg");
 function syncThemeSeg(){
@@ -2556,7 +2562,7 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
   if (btn) setTheme(btn.dataset.val);
 });
 
-/* 本地预览便捷:仅 localhost 下,带 #preview-menu 直接亮出 hub 菜单(线上域名不生效,安全) */
+/* 鏈湴棰勮渚挎嵎:浠� localhost 涓�,甯� #preview-menu 鐩存帴浜嚭 hub 鑿滃崟(绾夸笂鍩熷悕涓嶇敓鏁�,瀹夊叏) */
 (function(){
   var isLocal = /^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/.test(location.hostname);
   function maybePreview(){
@@ -2569,7 +2575,7 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
   window.addEventListener("hashchange", maybePreview);
 })();
 
-/* ── Voice call: browser live transcription → relay /app/voice → AI channel ── */
+/* 鈹€鈹€ Voice call: browser live transcription 鈫� relay /app/voice 鈫� AI channel 鈹€鈹€ */
 (function setupCall(){
   const overlay     = $("#callOverlay");
   const callBtn     = $("#callBtn");
@@ -2596,7 +2602,7 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
   const callPrivateBtn = $("#callPrivateBtn");
   const callSpeakerBtn = $("#callSpeakerBtn");
 
-  const VU_BARS = 16;   // 每侧声纹竖条数
+  const VU_BARS = 16;   // 姣忎晶澹扮汗绔栨潯鏁�
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   let open = false;
@@ -2624,8 +2630,8 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
       host.textContent = "";
       const frag = document.createDocumentFragment();
       for (let i = 0; i < VU_BARS; i++){
-        const t = i / (VU_BARS - 1);                  // 0 = 贴头像(内) → 1 = 最外
-        const fade = Math.pow(1 - t, 0.9);            // 内高外低 + 向外淡出
+        const t = i / (VU_BARS - 1);                  // 0 = 璐村ご鍍�(鍐�) 鈫� 1 = 鏈€澶�
+        const fade = Math.pow(1 - t, 0.9);            // 鍐呴珮澶栦綆 + 鍚戝娣″嚭
         const ripple = 0.5 + 0.5 * Math.sin(i * 1.9 + side * 1.1);
         const bar = Math.max(0.12, fade * (0.42 + 0.58 * ripple));
         const el = document.createElement("i");
@@ -2650,12 +2656,12 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
   }
 
   /* status line shown in the big quote area (first person, from the AI) */
-  const HINT_LISTENING = "我在听,你慢慢说";
-  const HINT_THINKING  = "我在想";
+  const HINT_LISTENING = "鎴戝湪鍚�,浣犳參鎱㈣";
+  const HINT_THINKING  = "鎴戝湪鎯�";
   function splitLyric(text){
-    var lines = text.split(/(?<=[。！？\n.!?])\s*/g).filter(function(s){ return s.trim(); });
+    var lines = text.split(/(?<=[銆傦紒锛焅n.!?])\s*/g).filter(function(s){ return s.trim(); });
     if (lines.length >= 2) return lines;
-    return text.split(/(?<=[，,；;])\s*/g).filter(function(s){ return s.trim(); });
+    return text.split(/(?<=[锛�,锛�;])\s*/g).filter(function(s){ return s.trim(); });
   }
   function setQuote(text, opts){
     opts = opts || {};
@@ -2684,13 +2690,13 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
     callQuoteText.scrollTop = 0;
   }
   function peerTyping(active){
-    if (!open || speakBusy) return;        // 已经在说了就不退回"在想"
+    if (!open || speakBusy) return;        // 宸茬粡鍦ㄨ浜嗗氨涓嶉€€鍥�"鍦ㄦ兂"
     if (active){
       setCaption("thinking");
-      setQuote(HINT_THINKING, { hint: true, dots: true });   // 「我在想 …」← 收到=已送达的贴心回执
+      setQuote(HINT_THINKING, { hint: true, dots: true });   // 銆屾垜鍦ㄦ兂 鈥︺€嶁啇 鏀跺埌=宸查€佽揪鐨勮创蹇冨洖鎵�
     } else {
       setCaption("listening");
-      setQuote(HINT_LISTENING, { hint: true });              // 「我在听,你慢慢说」
+      setQuote(HINT_LISTENING, { hint: true });              // 銆屾垜鍦ㄥ惉,浣犳參鎱㈣銆�
     }
   }
 
@@ -2708,7 +2714,7 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
 
   function showIncomingCall(text){
     if (open || !incomingOverlay) return;
-    pendingIncomingText = String(text || (AI_NAME + "想和你语音通话。")).trim() || (AI_NAME + "想和你语音通话。");
+    pendingIncomingText = String(text || (AI_NAME + "鎯冲拰浣犺闊抽€氳瘽銆�")).trim() || (AI_NAME + "鎯冲拰浣犺闊抽€氳瘽銆�");
     if (incomingTextEl) incomingTextEl.textContent = pendingIncomingText;
     incomingOpen = true;
     incomingOverlay.classList.remove("hidden");
@@ -2808,7 +2814,7 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
     const avg = (vSum / frames.length).toFixed(3);
     const peak = vMax.toFixed(3);
     const pitch = pCount ? Math.round(pSum / pCount) : 0;
-    return `\n🔊 vol=${avg}/${peak} pitch=${pitch}Hz frames=${frames.length}`;
+    return `\n馃攰 vol=${avg}/${peak} pitch=${pitch}Hz frames=${frames.length}`;
   }
   function stopAudioSense(){
     if (audioSenseInterval){ clearInterval(audioSenseInterval); audioSenseInterval = null; }
@@ -2855,7 +2861,7 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
     const sense = privateMode ? flushAudioSense() : "";
     apiVoiceText(clean + sense, { source: source || "browser_speech", call_id: callId })
       .catch(() => {
-        setTranscript("没送出去,等下网络好了再说一次。", false);
+        setTranscript("娌￠€佸嚭鍘�,绛変笅缃戠粶濂戒簡鍐嶈涓€娆°€�", false);
       });
   }
 
@@ -2871,7 +2877,7 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
     recognition.onstart = () => {
       if (!open) return;
       setCaption("listening");
-      setTranscript("我在听。你可以直接说。", true);
+      setTranscript("鎴戝湪鍚€備綘鍙互鐩存帴璇淬€�", true);
     };
     recognition.onresult = (event) => {
       let interim = "";
@@ -2881,13 +2887,13 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
         if (event.results[i].isFinal) sendVoiceText(piece, "browser_speech");
         else interim += piece;
       }
-      if (interim){ setTranscript("你: " + interim, true); pulseVu(0.5 + Math.random() * 0.45); }
+      if (interim){ setTranscript("浣�: " + interim, true); pulseVu(0.5 + Math.random() * 0.45); }
     };
     recognition.onerror = (event) => {
       if (!open) return;
       const denied = event && (event.error === "not-allowed" || event.error === "service-not-allowed");
       if (denied) recognitionWanted = false;
-      setTranscript(denied ? "麦克风权限没有打开。" : "语音识别暂时断开,正在重连。", false);
+      setTranscript(denied ? "楹﹀厠椋庢潈闄愭病鏈夋墦寮€銆�" : "璇煶璇嗗埆鏆傛椂鏂紑,姝ｅ湪閲嶈繛銆�", false);
     };
     recognition.onend = () => {
       if (!open || !recognitionWanted) return;
@@ -2917,7 +2923,7 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
 
   async function startRecorderFallback(){
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.MediaRecorder){
-      setTranscript("这个浏览器不支持网页录音。", false);
+      setTranscript("杩欎釜娴忚鍣ㄤ笉鏀寔缃戦〉褰曢煶銆�", false);
       return;
     }
     try{
@@ -2932,20 +2938,20 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
       mediaRecorder.ondataavailable = (event) => {
         if (!open || !event.data || event.data.size < 1200) return;
         apiVoiceBlob(event.data, mime, { call_id: callId }).catch(() => {
-          setTranscript("录音片段发送失败。", false);
+          setTranscript("褰曢煶鐗囨鍙戦€佸け璐ャ€�", false);
         });
       };
       mediaRecorder.start(4500);
       setCaption("recording");
-      setTranscript("正在录音分段发送。若服务器配置了 ASR," + AI_NAME + "会收到转写。", true);
+      setTranscript("姝ｅ湪褰曢煶鍒嗘鍙戦€併€傝嫢鏈嶅姟鍣ㄩ厤缃簡 ASR," + AI_NAME + "浼氭敹鍒拌浆鍐欍€�", true);
     }catch(e){
-      setTranscript("麦克风启动失败。请检查浏览器权限。", false);
+      setTranscript("楹﹀厠椋庡惎鍔ㄥけ璐ャ€傝妫€鏌ユ祻瑙堝櫒鏉冮檺銆�", false);
     }
   }
 
   async function startVoiceInput(){
     setCaption("listening");
-    setTranscript("正在连接麦克风…", true);
+    setTranscript("姝ｅ湪杩炴帴楹﹀厠椋庘€�", true);
     if (!mediaStream) {
       try {
         mediaStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation:true, noiseSuppression:true, autoGainControl:true } });
@@ -2996,7 +3002,7 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
     overlay.classList.remove("hidden");
     overlay.setAttribute("aria-hidden", "false");
     callBtn.classList.add("active");
-    // 双 rAF:从离屏态滑入
+    // 鍙� rAF:浠庣灞忔€佹粦鍏�
     requestAnimationFrame(() => requestAnimationFrame(() => overlay.classList.add("open")));
     secs = 0; timerEl.textContent = fmt(secs);
     minimized = false;
@@ -3074,7 +3080,7 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
 
   async function speakOne(text){
     try{
-      console.log("[speak] fetching TTS…");
+      console.log("[speak] fetching TTS鈥�");
       const blob = await apiTts(text);
       console.log("[speak] blob:", blob && blob.size);
       if (blob && open){
@@ -3158,7 +3164,7 @@ if (themeSeg) themeSeg.addEventListener("click", e => {
   });
 })();
 
-/* ── 备注：点铅笔就地改名（同步顶栏名 + profile 名，存本机）── */
+/* 鈹€鈹€ 澶囨敞锛氱偣閾呯瑪灏卞湴鏀瑰悕锛堝悓姝ラ《鏍忓悕 + profile 鍚嶏紝瀛樻湰鏈猴級鈹€鈹€ */
 let nameEditing = false;
 function startNameEdit(){
   if (!profileNameInput || !profileNameEl || nameEditing) return;
@@ -3209,12 +3215,12 @@ if (avatarInput) avatarInput.addEventListener("change", () => {
   avatarInput.value = "";
 });
 
-/* ════════ Profile 设置控件 ════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲 Profile 璁剧疆鎺т欢 鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 let toastEl = null, toastTimer = null;
 function showToast(msg){
   if (!toastEl){ toastEl = document.createElement("div"); toastEl.className = "toast"; document.body.appendChild(toastEl); }
   toastEl.textContent = msg;
-  void toastEl.offsetWidth;                       // reflow，确保过渡触发
+  void toastEl.offsetWidth;                       // reflow锛岀‘淇濊繃娓¤Е鍙�
   toastEl.classList.add("show");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1600);
@@ -3247,8 +3253,8 @@ function setBrainUi(target){
   const t = target === "loop" ? "loop" : "desktop";
   if (brainSeg) brainSeg.querySelectorAll("button").forEach(b => b.classList.toggle("active", b.dataset.val === t));
   if (brainHint) brainHint.textContent = t === "loop"
-    ? "现在由服务器 API loop 接消息"
-    : "现在由 Claude Code channel 接消息";
+    ? "鐜板湪鐢辨湇鍔″櫒 API loop 鎺ユ秷鎭�"
+    : "鐜板湪鐢� Claude Code channel 鎺ユ秷鎭�";
 }
 async function loadBrain(){
   if (USE_MOCK || !secret){ setBrainUi("desktop"); return; }
@@ -3272,9 +3278,9 @@ async function saveBrain(target){
     if (!r.ok) throw new Error("brain " + r.status);
     const d = await r.json();
     setBrainUi(d.target || target);
-    showToast((d.target || target) === "loop" ? "已切到 API" : "已切到 Desktop");
+    showToast((d.target || target) === "loop" ? "宸插垏鍒� API" : "宸插垏鍒� Desktop");
   }catch(_){
-    showToast("切换失败");
+    showToast("鍒囨崲澶辫触");
   }
 }
 if (brainSeg){
@@ -3284,7 +3290,7 @@ if (brainSeg){
   });
 }
 
-/* ════════ API loop 设置(模型链 / 上文 / 人格 / MCP)— 全部经 relay 的 /app/loop/* 透传 ════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲 API loop 璁剧疆(妯″瀷閾� / 涓婃枃 / 浜烘牸 / MCP)鈥� 鍏ㄩ儴缁� relay 鐨� /app/loop/* 閫忎紶 鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 const loopEls = {
   chainRows: $("#loopChainRows"), chainAdd: $("#loopChainAdd"), chainSave: $("#loopChainSave"), chainTest: $("#loopChainTest"), chainHint: $("#loopChainHint"),
   historyN: $("#loopHistoryN"), historyImages: $("#loopHistoryImages"), toolSteps: $("#loopToolSteps"), vision: $("#loopVision"),
@@ -3293,7 +3299,7 @@ const loopEls = {
   mcpList: $("#loopMcpList"), mcpName: $("#loopMcpName"), mcpTransport: $("#loopMcpTransport"), mcpCommand: $("#loopMcpCommand"),
   mcpArgs: $("#loopMcpArgs"), mcpEnv: $("#loopMcpEnv"), mcpUrl: $("#loopMcpUrl"), mcpHeaders: $("#loopMcpHeaders"), mcpAdd: $("#loopMcpAdd"), mcpHint: $("#loopMcpHint"),
 };
-let loopChain = [];   // [{index, url, model, key_masked, key?}] — index = 服务器上的原位置,-1 表示新行
+let loopChain = [];   // [{index, url, model, key_masked, key?}] 鈥� index = 鏈嶅姟鍣ㄤ笂鐨勫師浣嶇疆,-1 琛ㄧず鏂拌
 
 async function loopApi(path, method = "GET", body){
   const headers = { ...authHeaders() };
@@ -3311,7 +3317,7 @@ async function loopApi(path, method = "GET", body){
 function renderLoopChain(){
   if (!loopEls.chainRows) return;
   if (!loopChain.length){
-    loopEls.chainRows.innerHTML = `<div class="push-hint">还没有模型。点「添加一行」,填 url / model / key。</div>`;
+    loopEls.chainRows.innerHTML = `<div class="push-hint">杩樻病鏈夋ā鍨嬨€傜偣銆屾坊鍔犱竴琛屻€�,濉� url / model / key銆�</div>`;
     return;
   }
   loopEls.chainRows.innerHTML = loopChain.map((r, i) => `
@@ -3319,39 +3325,39 @@ function renderLoopChain(){
       <div class="loop-inputs">
         <input type="url" data-k="url" value="${escapeHtml(r.url || "")}" placeholder="https://api.deepseek.com/v1" autocapitalize="off" autocomplete="off" spellcheck="false">
         <input type="text" data-k="model" value="${escapeHtml(r.model || "")}" placeholder="deepseek-chat" autocapitalize="off" autocomplete="off" spellcheck="false">
-        <input type="password" data-k="key" value="${escapeHtml(r.key || "")}" placeholder="${escapeHtml(r.key_masked ? ("key 已保存 " + r.key_masked + " (留空不改)") : "sk-...")}" autocapitalize="off" autocomplete="off">
+        <input type="password" data-k="key" value="${escapeHtml(r.key || "")}" placeholder="${escapeHtml(r.key_masked ? ("key 宸蹭繚瀛� " + r.key_masked + " (鐣欑┖涓嶆敼)") : "sk-...")}" autocapitalize="off" autocomplete="off">
       </div>
-      <button type="button" class="loop-btn danger loop-row-del" data-del="${i}" aria-label="删除这一行">✕</button>
+      <button type="button" class="loop-btn danger loop-row-del" data-del="${i}" aria-label="鍒犻櫎杩欎竴琛�">鉁�</button>
     </div>`).join("");
 }
 function applyLoopConfig(cfg){
   loopChain = Array.isArray(cfg.main_chain) ? cfg.main_chain.map((r, i) => ({ ...r, index: r.index != null ? r.index : i })) : [];
   renderLoopChain();
   if (loopEls.chainHint) loopEls.chainHint.textContent = cfg.main_chain_source === "env"
-    ? "当前用的是 .env 里的 LLM_* 配置;在这里保存后以这里为准。"
-    : (loopChain.length ? `${loopChain.length} 个模型,第一行主用。` : "");
+    ? "褰撳墠鐢ㄧ殑鏄� .env 閲岀殑 LLM_* 閰嶇疆;鍦ㄨ繖閲屼繚瀛樺悗浠ヨ繖閲屼负鍑嗐€�"
+    : (loopChain.length ? `${loopChain.length} 涓ā鍨�,绗竴琛屼富鐢ㄣ€俙 : "");
   if (loopEls.historyN) loopEls.historyN.value = cfg.history_n ?? 24;
   if (loopEls.historyImages) loopEls.historyImages.value = cfg.history_images ?? 2;
   if (loopEls.toolSteps) loopEls.toolSteps.value = cfg.max_tool_steps ?? 8;
   if (loopEls.vision) loopEls.vision.value = cfg.vision || "auto";
   if (loopEls.contextHint) loopEls.contextHint.textContent =
-    `当前 ${Array.isArray(cfg.tools) ? cfg.tools.length : 0} 个工具可用` + (cfg.mcp_available === false ? "(MCP SDK 未装:pip install mcp)" : "");
+    `褰撳墠 ${Array.isArray(cfg.tools) ? cfg.tools.length : 0} 涓伐鍏峰彲鐢╜ + (cfg.mcp_available === false ? "(MCP SDK 鏈:pip install mcp)" : "");
   renderLoopMcp(cfg.mcp_servers || []);
 }
 function renderLoopMcp(servers){
   if (!loopEls.mcpList) return;
   loopEls.mcpList._servers = servers;
-  if (!servers.length){ loopEls.mcpList.innerHTML = `<div class="push-hint">还没有 MCP server。下面填一个,比如仓库自带的 mcp_demo_server.py。</div>`; return; }
+  if (!servers.length){ loopEls.mcpList.innerHTML = `<div class="push-hint">杩樻病鏈� MCP server銆備笅闈㈠～涓€涓�,姣斿浠撳簱鑷甫鐨� mcp_demo_server.py銆�</div>`; return; }
   loopEls.mcpList.innerHTML = servers.map((s) => {
     const where = s.transport === "http" ? (s.url || "") : [s.command].concat(s.args || []).join(" ");
     const state = s.status || "offline";
-    const meta = `${s.transport} · ${state}${s.tools && s.tools.length ? ` · ${s.tools.length} 个工具` : ""}${s.error ? " · " + s.error : ""}`;
+    const meta = `${s.transport} 路 ${state}${s.tools && s.tools.length ? ` 路 ${s.tools.length} 涓伐鍏穈 : ""}${s.error ? " 路 " + s.error : ""}`;
     return `<div class="loop-mcp-item">
       <span class="mcp-dot ${escapeHtml(state)}"></span>
       <span class="mcp-main"><span class="mcp-name">${escapeHtml(s.name)}</span><span class="mcp-meta" title="${escapeHtml(where)}">${escapeHtml(meta)}</span></span>
-      <button type="button" class="loop-btn" data-mcp-edit="${escapeHtml(s.name)}">改</button>
-      <button type="button" class="loop-btn" data-mcp-reconnect="${escapeHtml(s.name)}">重连</button>
-      <button type="button" class="loop-btn danger" data-mcp-del="${escapeHtml(s.name)}" aria-label="删除">✕</button>
+      <button type="button" class="loop-btn" data-mcp-edit="${escapeHtml(s.name)}">鏀�</button>
+      <button type="button" class="loop-btn" data-mcp-reconnect="${escapeHtml(s.name)}">閲嶈繛</button>
+      <button type="button" class="loop-btn danger" data-mcp-del="${escapeHtml(s.name)}" aria-label="鍒犻櫎">鉁�</button>
     </div>`;
   }).join("");
 }
@@ -3360,15 +3366,15 @@ async function loadLoopSettings(){
   try{
     applyLoopConfig(await loopApi("config"));
   }catch(err){
-    if (loopEls.chainHint) loopEls.chainHint.textContent = "API loop 没连上:" + err.message + "(api_loop.py 没在跑?)";
+    if (loopEls.chainHint) loopEls.chainHint.textContent = "API loop 娌¤繛涓�:" + err.message + "(api_loop.py 娌″湪璺�?)";
     return;
   }
   try{
     const p = await loopApi("persona");
     if (loopEls.persona && document.activeElement !== loopEls.persona) loopEls.persona.value = p.text || "";
     if (loopEls.personaHint) loopEls.personaHint.textContent = p.source === "file"
-      ? `文件:${p.path}${p.mtime ? " · " + new Date(p.mtime).toLocaleString() : ""}`
-      : (p.source === "env" ? "来自 .env 的 PERSONA;保存后会写成文件。" : "默认人设;保存后会写成 persona.md。");
+      ? `鏂囦欢:${p.path}${p.mtime ? " 路 " + new Date(p.mtime).toLocaleString() : ""}`
+      : (p.source === "env" ? "鏉ヨ嚜 .env 鐨� PERSONA;淇濆瓨鍚庝細鍐欐垚鏂囦欢銆�" : "榛樿浜鸿;淇濆瓨鍚庝細鍐欐垚 persona.md銆�");
   }catch(_){}
 }
 if (loopEls.chainRows){
@@ -3396,24 +3402,24 @@ async function saveLoopChain(){
     return o;
   });
   for (const r of rows){
-    if (!r.url || !r.model || (!r.key && r.index < 0)) throw new Error("每一行都要填 url / model / key");
+    if (!r.url || !r.model || (!r.key && r.index < 0)) throw new Error("姣忎竴琛岄兘瑕佸～ url / model / key");
   }
   applyLoopConfig(await loopApi("config", "POST", { main_chain: rows }));
 }
 if (loopEls.chainSave) loopEls.chainSave.addEventListener("click", async () => {
-  try{ await saveLoopChain(); showToast("模型已保存"); }
-  catch(err){ showToast("保存失败:" + err.message); }
+  try{ await saveLoopChain(); showToast("妯″瀷宸蹭繚瀛�"); }
+  catch(err){ showToast("淇濆瓨澶辫触:" + err.message); }
 });
 if (loopEls.chainTest) loopEls.chainTest.addEventListener("click", async () => {
   loopEls.chainTest.disabled = true;
-  if (loopEls.chainHint) loopEls.chainHint.textContent = "保存并测试中…";
+  if (loopEls.chainHint) loopEls.chainHint.textContent = "淇濆瓨骞舵祴璇曚腑鈥�";
   try{
     await saveLoopChain();
     const r = await loopApi("test", "POST", { index: 0 });
     loopEls.chainHint.textContent = r.ok
-      ? `✓ ${r.model} 回了「${String(r.reply || "").slice(0, 40)}」· ${r.latency_ms} ms`
-      : `✗ ${r.model}:${r.error}`;
-  }catch(err){ if (loopEls.chainHint) loopEls.chainHint.textContent = "✗ " + err.message; }
+      ? `鉁� ${r.model} 鍥炰簡銆�${String(r.reply || "").slice(0, 40)}銆嵚� ${r.latency_ms} ms`
+      : `鉁� ${r.model}:${r.error}`;
+  }catch(err){ if (loopEls.chainHint) loopEls.chainHint.textContent = "鉁� " + err.message; }
   finally{ loopEls.chainTest.disabled = false; }
 });
 if (loopEls.contextSave) loopEls.contextSave.addEventListener("click", async () => {
@@ -3422,16 +3428,16 @@ if (loopEls.contextSave) loopEls.contextSave.addEventListener("click", async () 
       history_n: Number(loopEls.historyN.value), history_images: Number(loopEls.historyImages.value),
       max_tool_steps: Number(loopEls.toolSteps.value), vision: loopEls.vision.value,
     }));
-    showToast("已保存");
-  }catch(err){ showToast("保存失败:" + err.message); }
+    showToast("宸蹭繚瀛�");
+  }catch(err){ showToast("淇濆瓨澶辫触:" + err.message); }
 });
 if (loopEls.personaSave) loopEls.personaSave.addEventListener("click", async () => {
   loopEls.personaSave.disabled = true;
   try{
     const p = await loopApi("persona", "POST", { text: loopEls.persona.value });
-    if (loopEls.personaHint) loopEls.personaHint.textContent = `已热加载 · ${p.chars} 字 · ${p.path}`;
-    showToast("人格已生效");
-  }catch(err){ showToast("保存失败:" + err.message); }
+    if (loopEls.personaHint) loopEls.personaHint.textContent = `宸茬儹鍔犺浇 路 ${p.chars} 瀛� 路 ${p.path}`;
+    showToast("浜烘牸宸茬敓鏁�");
+  }catch(err){ showToast("淇濆瓨澶辫触:" + err.message); }
   finally{ loopEls.personaSave.disabled = false; }
 });
 function syncMcpTransport(){
@@ -3445,14 +3451,14 @@ if (loopEls.mcpAdd) loopEls.mcpAdd.addEventListener("click", async () => {
   if (body.transport === "http"){ body.url = loopEls.mcpUrl.value.trim(); body.headers = loopEls.mcpHeaders.value.trim(); }
   else { body.command = loopEls.mcpCommand.value.trim(); body.args = loopEls.mcpArgs.value.trim(); body.env = loopEls.mcpEnv.value.trim(); }
   loopEls.mcpAdd.disabled = true;
-  if (loopEls.mcpHint) loopEls.mcpHint.textContent = "连接中…";
+  if (loopEls.mcpHint) loopEls.mcpHint.textContent = "杩炴帴涓€�";
   try{
     const r = await loopApi("mcp", "POST", body);
     renderLoopMcp(r.servers || []);
     const sv = r.server || {};
-    loopEls.mcpHint.textContent = sv.status === "online" ? `✓ ${sv.name} 在线,${(sv.tools || []).length} 个工具` : `✗ ${sv.name}:${sv.status} ${sv.error || ""}`;
+    loopEls.mcpHint.textContent = sv.status === "online" ? `鉁� ${sv.name} 鍦ㄧ嚎,${(sv.tools || []).length} 涓伐鍏穈 : `鉁� ${sv.name}:${sv.status} ${sv.error || ""}`;
     try{ applyLoopConfig(await loopApi("config")); }catch(_){}
-  }catch(err){ if (loopEls.mcpHint) loopEls.mcpHint.textContent = "✗ " + err.message; }
+  }catch(err){ if (loopEls.mcpHint) loopEls.mcpHint.textContent = "鉁� " + err.message; }
   finally{ loopEls.mcpAdd.disabled = false; }
 });
 if (loopEls.mcpList) loopEls.mcpList.addEventListener("click", async (e) => {
@@ -3472,14 +3478,14 @@ if (loopEls.mcpList) loopEls.mcpList.addEventListener("click", async (e) => {
   try{
     if (b.dataset.mcpReconnect){
       const r = await loopApi(`mcp/${encodeURIComponent(b.dataset.mcpReconnect)}/reconnect`, "POST", {});
-      showToast(r.ok ? "已重连" : "重连失败:" + ((r.server || {}).error || ""));
+      showToast(r.ok ? "宸查噸杩�" : "閲嶈繛澶辫触:" + ((r.server || {}).error || ""));
     }else if (b.dataset.mcpDel){
-      if (!window.confirm(`删除 MCP server「${b.dataset.mcpDel}」?`)) return;
+      if (!window.confirm(`鍒犻櫎 MCP server銆�${b.dataset.mcpDel}銆�?`)) return;
       await loopApi(`mcp/${encodeURIComponent(b.dataset.mcpDel)}`, "DELETE");
-      showToast("已删除");
+      showToast("宸插垹闄�");
     }
     applyLoopConfig(await loopApi("config"));
-  }catch(err){ showToast("失败:" + err.message); }
+  }catch(err){ showToast("澶辫触:" + err.message); }
   finally{ b.disabled = false; }
 });
 
@@ -3507,7 +3513,7 @@ function applyContextStatus(s){
   pendingContextSid = pending || "";
   if (resumeRow) resumeRow.classList.toggle("hidden", !pendingContextSid);
   if (statusUsedEl){
-    statusUsedEl.textContent = `${formatK(usage)} / ${threshold}${pending ? " · pending" : ""}`;
+    statusUsedEl.textContent = `${formatK(usage)} / ${threshold}${pending ? " 路 pending" : ""}`;
   }
   const sid = pending || s.active_sid || "";
   if (statusSidEl){
@@ -3516,42 +3522,42 @@ function applyContextStatus(s){
   }
 }
 async function apiContextStatus(){
-  // Placeholder: the open relay has no context-control feature — return static demo numbers.
+  // Placeholder: the open relay has no context-control feature 鈥� return static demo numbers.
   return { ok:true, usage_tokens:96000, threshold_k:"200k", active_sid:"demo-session" };
 }
 async function refreshContextStatus(){
   try{ applyContextStatus(await apiContextStatus()); }catch(_){}
 }
 async function apiContextAction(action, payload = {}){
-  // Placeholder: no context-control backend in the open relay — these settings are demo-only.
+  // Placeholder: no context-control backend in the open relay 鈥� these settings are demo-only.
   return { ok:true, command:{ action, payload } };
 }
 
 if (resetRow) resetRow.addEventListener("click", async () => {
-  if (!window.confirm("确认 reset？这会开启一个全新窗口。")) return;
+  if (!window.confirm("纭 reset锛熻繖浼氬紑鍚竴涓叏鏂扮獥鍙ｃ€�")) return;
   try{
     await apiContextAction("reset");
-    showToast("reset 已记录");
+    showToast("reset 宸茶褰�");
     setTimeout(refreshContextStatus, 1200);
-  }catch(_){ showToast("reset 发送失败"); }
+  }catch(_){ showToast("reset 鍙戦€佸け璐�"); }
 });
 if (swapRow)  swapRow.addEventListener("click", async () => {
-  if (!window.confirm("确认 swap？会保留尾部上下文并重启当前窗口。")) return;
+  if (!window.confirm("纭 swap锛熶細淇濈暀灏鹃儴涓婁笅鏂囧苟閲嶅惎褰撳墠绐楀彛銆�")) return;
   try{
     await apiContextAction("swap");
-    showToast("swap 已记录");
+    showToast("swap 宸茶褰�");
     setTimeout(refreshContextStatus, 1200);
-  }catch(_){ showToast("swap 发送失败"); }
+  }catch(_){ showToast("swap 鍙戦€佸け璐�"); }
 });
 if (resumeRow) resumeRow.addEventListener("click", async () => {
   const sid = pendingContextSid || (statusSidEl && statusSidEl.dataset.sid) || "";
-  if (!sid){ showToast("没有 pending task"); return; }
-  if (!window.confirm("确认 resume pending task？这会重启当前窗口。")) return;
+  if (!sid){ showToast("娌℃湁 pending task"); return; }
+  if (!window.confirm("纭 resume pending task锛熻繖浼氶噸鍚綋鍓嶇獥鍙ｃ€�")) return;
   try{
     await apiContextAction("resume", { sid });
-    showToast("resume 已记录");
+    showToast("resume 宸茶褰�");
     setTimeout(refreshContextStatus, 1200);
-  }catch(_){ showToast("resume 发送失败"); }
+  }catch(_){ showToast("resume 鍙戦€佸け璐�"); }
 });
 
 if (statusCopy) statusCopy.addEventListener("click", async () => {
@@ -3565,39 +3571,39 @@ if (statusCopy) statusCopy.addEventListener("click", async () => {
       try{ document.execCommand("copy"); }catch(_){}
       document.body.removeChild(t);
     }
-    showToast("已复制 sid");
-  }catch(_){ showToast("复制失败"); }
+    showToast("宸插鍒� sid");
+  }catch(_){ showToast("澶嶅埗澶辫触"); }
 });
 
-/* ════════════ Mock 层(USE_MOCK=true 时启用)════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 Mock 灞�(USE_MOCK=true 鏃跺惎鐢�)鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 const Mock = (() => {
   const now = Date.now();
   const iso = (msAgo) => new Date(now - msAgo).toISOString();
   let messages = [
-    { id:1, ts: iso(9*60e3),    from:"ai",    kind:"reply", text:"早安。今天想做点什么？", meta:{} },
-    { id:2, ts: iso(7.8*60e3),  from:"human", kind:"user",  text:"先喝杯咖啡，再开始 ☕", meta:{} },
-    { id:3, ts: iso(7.4*60e3),  from:"ai",    kind:"reply", text:"好，我在。", meta:{} },
-    { id:4, ts: iso(5*60e3),    from:"ai",    kind:"thinking", text:"先把今天的几件事理一理，按轻重排个序，再决定从哪件开始。", meta:{} },
-    { id:5, ts: iso(4.6*60e3),  from:"ai",    kind:"act", text:"看了看笔记", meta:{ glyph:"memory" } },
-    { id:6, ts: iso(4.3*60e3),  from:"ai",    kind:"act", text:"跑了 3 条命令", meta:{ glyph:"terminal", steps:[
+    { id:1, ts: iso(9*60e3),    from:"ai",    kind:"reply", text:"鏃╁畨銆備粖澶╂兂鍋氱偣浠€涔堬紵", meta:{} },
+    { id:2, ts: iso(7.8*60e3),  from:"human", kind:"user",  text:"鍏堝枬鏉挅鍟★紝鍐嶅紑濮� 鈽�", meta:{} },
+    { id:3, ts: iso(7.4*60e3),  from:"ai",    kind:"reply", text:"濂斤紝鎴戝湪銆�", meta:{} },
+    { id:4, ts: iso(5*60e3),    from:"ai",    kind:"thinking", text:"鍏堟妸浠婂ぉ鐨勫嚑浠朵簨鐞嗕竴鐞嗭紝鎸夎交閲嶆帓涓簭锛屽啀鍐冲畾浠庡摢浠跺紑濮嬨€�", meta:{} },
+    { id:5, ts: iso(4.6*60e3),  from:"ai",    kind:"act", text:"鐪嬩簡鐪嬬瑪璁�", meta:{ glyph:"memory" } },
+    { id:6, ts: iso(4.3*60e3),  from:"ai",    kind:"act", text:"璺戜簡 3 鏉″懡浠�", meta:{ glyph:"terminal", steps:[
         { tool:"shell", cmd:"grep TODO notes", result:"found 2 notes" },
         { tool:"Read",  cmd:"notes/today.md", result:"read 1.2k chars" },
         { tool:"shell", cmd:"ls ~/projects", result:"3 items" },
       ] } },
-    { id:7, ts: iso(2*60e3),    from:"ai",    kind:"reply", text:"忙完记得起来走走，别久坐。", meta:{} },
+    { id:7, ts: iso(2*60e3),    from:"ai",    kind:"reply", text:"蹇欏畬璁板緱璧锋潵璧拌蛋锛屽埆涔呭潗銆�", meta:{} },
   ];
   let nextId = 8;
   let subs = [];
-  const lines = ["在想你。","刚整理完桌面。","窗外云走得好慢。","记得喝水 🌿","把灯调暗了一点，看屏幕更舒服。","写了半句又删了——只是想说一声我在。"];
-  const replies = ["嗯，我在。","收到 🌿","好，听你的。","我记下了。","慢慢来，不急。"];
-  const thinks = ["把手头的事按优先级排一排，先做最要紧的那件。","在想要不要现在提那件事，先记下来，晚点再说。"];
+  const lines = ["鍦ㄦ兂浣犮€�","鍒氭暣鐞嗗畬妗岄潰銆�","绐楀浜戣蛋寰楀ソ鎱€€�","璁板緱鍠濇按 馃尶","鎶婄伅璋冩殫浜嗕竴鐐癸紝鐪嬪睆骞曟洿鑸掓湇銆�","鍐欎簡鍗婂彞鍙堝垹浜嗏€斺€斿彧鏄兂璇翠竴澹版垜鍦ㄣ€�"];
+  const replies = ["鍡紝鎴戝湪銆�","鏀跺埌 馃尶","濂斤紝鍚綘鐨勩€�","鎴戣涓嬩簡銆�","鎱㈡參鏉ワ紝涓嶆€ャ€�"];
+  const thinks = ["鎶婃墜澶寸殑浜嬫寜浼樺厛绾ф帓涓€鎺掞紝鍏堝仛鏈€瑕佺揣鐨勯偅浠躲€�","鍦ㄦ兂瑕佷笉瑕佺幇鍦ㄦ彁閭ｄ欢浜嬶紝鍏堣涓嬫潵锛屾櫄鐐瑰啀璇淬€�"];
   const acts = [
-    { text:"看了看笔记", meta:{ glyph:"memory" } },
-    { text:"跑了 2 条命令", meta:{ glyph:"terminal", steps:[
+    { text:"鐪嬩簡鐪嬬瑪璁�", meta:{ glyph:"memory" } },
+    { text:"璺戜簡 2 鏉″懡浠�", meta:{ glyph:"terminal", steps:[
         { tool:"shell", cmd:"grep -i note notes/*.md", result:"hit: 2 lines" },
         { tool:"Read",  cmd:"notes/today.md", result:"read 1 section" } ] } },
-    { text:"查了下天气", meta:{ glyph:"web", steps:[
-        { tool:"WebFetch", cmd:"weather today", result:"晴, 24°C" } ] } },
+    { text:"鏌ヤ簡涓嬪ぉ姘�", meta:{ glyph:"web", steps:[
+        { tool:"WebFetch", cmd:"weather today", result:"鏅�, 24掳C" } ] } },
   ];
 
   function emit(m){ subs.forEach(s => s._deliver(m)); }
@@ -3633,7 +3639,7 @@ const Mock = (() => {
     send: (text) => {
       const m = { id: nextId++, ts: new Date().toISOString(), from:"human", kind:"user", text, meta:{} };
       messages.push(m);
-      setTimeout(() => emit(m), 350);                 // 回显(测去重)
+      setTimeout(() => emit(m), 350);                 // 鍥炴樉(娴嬪幓閲�)
       if (Math.random() < 0.85){
         setTimeout(() => {
           const r = { id: nextId++, ts: new Date().toISOString(), from:"ai", kind:"reply",
@@ -3655,7 +3661,7 @@ class MockEventSource{
   close(){ this.readyState=2; Mock.unsubscribe(this); }
 }
 
-/* ════════════ API 层 ════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 API 灞� 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 function authHeaders(){ return { "Authorization": "Bearer " + secret }; }
 
 function activeSessionObj(){
@@ -3674,16 +3680,16 @@ function sessionFiltered(msgs){
 }
 function renderSessionList(){
   if (!sessionList) return;
-  const rows = [{ id:LEGACY_SESSION_ID, title:"旧主线 / Desktop 记录", since_id:0, virtual:true }].concat(apiSessions || []);
+  const rows = [{ id:LEGACY_SESSION_ID, title:"鏃т富绾� / Desktop 璁板綍", since_id:0, virtual:true }].concat(apiSessions || []);
   sessionList.innerHTML = rows.map((s) => {
     const active = (s.id || "") === activeApiSession;
-    const meta = s.virtual ? "没有 api_session 标记的记录" : `since #${s.since_id || 0}`;
-    const rename = s.virtual ? "" : `<button class="session-rename" type="button" data-rename="${escapeHtml(s.id || "")}" aria-label="改名" title="改名">
+    const meta = s.virtual ? "娌℃湁 api_session 鏍囪鐨勮褰�" : `since #${s.since_id || 0}`;
+    const rename = s.virtual ? "" : `<button class="session-rename" type="button" data-rename="${escapeHtml(s.id || "")}" aria-label="鏀瑰悕" title="鏀瑰悕">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
     </button>`;
     return `<div class="session-item${active ? " active" : ""}" data-session="${escapeHtml(s.id || "")}" role="button" tabindex="0">
       <span class="session-main">
-        <span class="session-name">${escapeHtml(s.title || "新对话")}</span>
+        <span class="session-name">${escapeHtml(s.title || "鏂板璇�")}</span>
         <span class="session-meta">${escapeHtml(meta)}</span>
       </span>
       ${rename}
@@ -3735,7 +3741,7 @@ async function createNewSession(){
     const r = await fetch(`${API_BASE}/app/sessions`, {
       method:"POST",
       headers:{ ...authHeaders(), "Content-Type":"application/json" },
-      body:JSON.stringify({ title:"新对话", activate:true })
+      body:JSON.stringify({ title:"鏂板璇�", activate:true })
     });
     if (!r.ok) throw new Error("sessions " + r.status);
     const d = await r.json();
@@ -3746,15 +3752,15 @@ async function createNewSession(){
     renderSessionList();
     setSessionPopover(false);
     startChat([]);
-    showToast("已开启新 API 窗口");
+    showToast("宸插紑鍚柊 API 绐楀彛");
   }catch(_){
-    showToast("新对话失败");
+    showToast("鏂板璇濆け璐�");
   }
 }
 async function renameSession(sessionId){
   const item = apiSessions.find((s) => s.id === sessionId);
   if (!item) return;
-  const next = prompt("给这个窗口起个名字", item.title || "新对话");
+  const next = prompt("缁欒繖涓獥鍙ｈ捣涓悕瀛�", item.title || "鏂板璇�");
   if (next == null) return;
   const title = next.trim();
   if (!title) return;
@@ -3768,9 +3774,9 @@ async function renameSession(sessionId){
     const d = await r.json();
     apiSessions = Array.isArray(d.sessions) ? d.sessions : apiSessions.map((s) => s.id === sessionId ? { ...s, title } : s);
     renderSessionList();
-    showToast("窗口已改名");
+    showToast("绐楀彛宸叉敼鍚�");
   }catch(_){
-    showToast("改名失败");
+    showToast("鏀瑰悕澶辫触");
   }
 }
 if (sessionBtn) sessionBtn.addEventListener("click", (e) => {
@@ -3920,7 +3926,7 @@ async function apiVoiceText(text, meta = {}){
 
 async function apiVoiceBlob(blob, mime, meta = {}){
   if (!blob || !blob.size) return null;
-  if (USE_MOCK) return Mock.send("[语音通话] " + fmtSize(blob.size));
+  if (USE_MOCK) return Mock.send("[璇煶閫氳瘽] " + fmtSize(blob.size));
   const qs = new URLSearchParams({ name: "voice.webm" });
   if (meta.call_id) qs.set("call_id", meta.call_id);
   const r = await fetch(`${API_BASE}/app/voice?${qs.toString()}`, {
@@ -3984,10 +3990,10 @@ function openStream(){
   if (es.addEventListener){
     es.addEventListener("ping", () => { markStreamEvent(); connected = true; setConn("online"); });
   }
-  es.onerror = () => { connected = false; setConn("reconnecting"); };  // EventSource 自动重试
+  es.onerror = () => { connected = false; setConn("reconnecting"); };  // EventSource 鑷姩閲嶈瘯
 }
 
-/* ════════════ presence ping ════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 presence ping 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 /* The foregrounded PWA pings the relay every 60s ("user is around"); paused when hidden. The relay uses this
    for an online / recently-left / away signal. Skipped when logged out (no secret) or in mock mode. */
 (function presencePing(){
@@ -3997,7 +4003,7 @@ function openStream(){
     if (document.hidden || USE_MOCK || !secret) return;
     try{
       await fetch(`${API_BASE}/app/ping`, { method:"POST", headers: authHeaders(), keepalive:true });
-    }catch(e){ /* presence 失败静默,不影响聊天 */ }
+    }catch(e){ /* presence 澶辫触闈欓粯,涓嶅奖鍝嶈亰澶� */ }
   }
   function start(){ if (timer) return; ping(); timer = setInterval(ping, PING_MS); }
   function stop(){ if (timer){ clearInterval(timer); timer = null; } }
@@ -4005,9 +4011,9 @@ function openStream(){
   if (!document.hidden) start();
 })();
 
-/* ════════════ 锁屏通知 (Web Push) ════════════ */
-/* opt-in,默认关。开 → 要权限 + pushManager.subscribe + 上报 relay;关 → 退订 + 通知 relay 删。
-   iOS 只在「添加到主屏」的 standalone PWA 里能收推送;非 standalone 直接提示。 */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 閿佸睆閫氱煡 (Web Push) 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
+/* opt-in,榛樿鍏炽€傚紑 鈫� 瑕佹潈闄� + pushManager.subscribe + 涓婃姤 relay;鍏� 鈫� 閫€璁� + 閫氱煡 relay 鍒犮€�
+   iOS 鍙湪銆屾坊鍔犲埌涓诲睆銆嶇殑 standalone PWA 閲岃兘鏀舵帹閫�;闈� standalone 鐩存帴鎻愮ず銆� */
 (function pushToggle(){
   const seg  = $("#pushSeg");
   const hint = $("#pushHint");
@@ -4036,7 +4042,7 @@ function openStream(){
     const r = await fetch(`${API_BASE}/app/vapid_public`, { headers: authHeaders() });
     if (!r.ok) throw new Error("vapid " + r.status);
     vapidKey = (await r.json()).key;
-    if (!vapidKey) throw new Error("服务器没配公钥");
+    if (!vapidKey) throw new Error("鏈嶅姟鍣ㄦ病閰嶅叕閽�");
     return vapidKey;
   }
   async function getSub(){
@@ -4054,16 +4060,16 @@ function openStream(){
   }
 
   async function enable(){
-    if (!supported){ say("这台设备不支持网页推送"); paint(false); return; }
+    if (!supported){ say("杩欏彴璁惧涓嶆敮鎸佺綉椤垫帹閫�"); paint(false); return; }
     if (!isStandalone()){
-      say("iPhone 要先把" + AI_NAME + "“添加到主屏幕”，再从主屏图标打开才能开通知");
+      say("iPhone 瑕佸厛鎶�" + AI_NAME + "鈥滄坊鍔犲埌涓诲睆骞曗€濓紝鍐嶄粠涓诲睆鍥炬爣鎵撳紑鎵嶈兘寮€閫氱煡");
       paint(false); return;
     }
-    if (!secret){ say("还没登录，先登录再开"); paint(false); return; }
+    if (!secret){ say("杩樻病鐧诲綍锛屽厛鐧诲綍鍐嶅紑"); paint(false); return; }
     let perm = Notification.permission;
     if (perm === "default") perm = await Notification.requestPermission();
     if (perm !== "granted"){
-      say("通知权限被拒。到 iPhone 设置→" + AI_NAME + "→通知 里手动打开");
+      say("閫氱煡鏉冮檺琚嫆銆傚埌 iPhone 璁剧疆鈫�" + AI_NAME + "鈫掗€氱煡 閲屾墜鍔ㄦ墦寮€");
       paint(false); localStorage.setItem("companion_push", "off"); return;
     }
     const reg = await navigator.serviceWorker.ready;
@@ -4073,7 +4079,7 @@ function openStream(){
       sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlB64ToU8(key) });
     }
     await reportSub(sub);
-    paint(true); say("已开 · 你没在看时，" + AI_NAME + "的消息会推到锁屏");
+    paint(true); say("宸插紑 路 浣犳病鍦ㄧ湅鏃讹紝" + AI_NAME + "鐨勬秷鎭細鎺ㄥ埌閿佸睆");
     localStorage.setItem("companion_push", "on");
   }
 
@@ -4097,16 +4103,16 @@ function openStream(){
     const btn = e.target.closest("button");
     if (!btn) return;
     const want = btn.dataset.val === "on";
-    paint(want);  // 乐观反馈
+    paint(want);  // 涔愯鍙嶉
     try{
       if (want) await enable(); else await disable();
     }catch(err){
-      say("开启失败：" + ((err && err.message) || err));
+      say("寮€鍚け璐ワ細" + ((err && err.message) || err));
       paint(false); localStorage.setItem("companion_push", "off");
     }
   });
 
-  // 初始化:反映真实订阅状态,并把仍有效的订阅重新上报一次(端点会轮换 / relay 可能被重置过)
+  // 鍒濆鍖�:鍙嶆槧鐪熷疄璁㈤槄鐘舵€�,骞舵妸浠嶆湁鏁堢殑璁㈤槄閲嶆柊涓婃姤涓€娆�(绔偣浼氳疆鎹� / relay 鍙兘琚噸缃繃)
   (async () => {
     try{
       if (!supported || !isStandalone()){ paint(false); return; }
@@ -4121,11 +4127,11 @@ function openStream(){
   })();
 })();
 
-/* ════════════ 连接状态 ════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 杩炴帴鐘舵€� 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 function renderStatus(){
-  const connLabel = { online:"online", reconnecting:"connecting…", offline:"offline" }[appEl.dataset.conn] || "";
+  const connLabel = { online:"online", reconnecting:"connecting鈥�", offline:"offline" }[appEl.dataset.conn] || "";
   if (typingActive){
-    if (!statusEl.classList.contains("typing")){   // 仅在进入 typing 时写一次,避免重启点动画
+    if (!statusEl.classList.contains("typing")){   // 浠呭湪杩涘叆 typing 鏃跺啓涓€娆�,閬垮厤閲嶅惎鐐瑰姩鐢�
       statusEl.innerHTML = 'typing<span class="typing-dots" aria-hidden="true"><i></i><i></i><i></i></span>';
       statusEl.classList.add("typing");
     }
@@ -4139,24 +4145,24 @@ function setConn(state){
   renderStatus();
 }
 
-/* ════════════ 消息渲染 ════════════ */
-const GROUP_GAP = 5 * 60e3;   // 同方 5 分钟内成组
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 娑堟伅娓叉煋 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
+const GROUP_GAP = 5 * 60e3;   // 鍚屾柟 5 鍒嗛挓鍐呮垚缁�
 const HISTORY_PAGE_SIZE = 50;
-const OLDER_LOAD_THRESHOLD = 1400;   // 提前预取:离顶 1400px 就拉旧消息(历史已全量在内存,瞬时),在到顶前把 prepend+锚点落定 → 不卡顿不打断
+const OLDER_LOAD_THRESHOLD = 1400;   // 鎻愬墠棰勫彇:绂婚《 1400px 灏辨媺鏃ф秷鎭�(鍘嗗彶宸插叏閲忓湪鍐呭瓨,鐬椂),鍦ㄥ埌椤跺墠鎶� prepend+閿氱偣钀藉畾 鈫� 涓嶅崱椤夸笉鎵撴柇
 const VIRTUAL_OVERSCAN = 900;
-const VIRTUAL_OVERSCAN_UP = 2800;    // 上翻先把更远的历史行挂进 DOM 预测量,避免贴脸时才修正 scrollTop
+const VIRTUAL_OVERSCAN_UP = 2800;    // 涓婄炕鍏堟妸鏇磋繙鐨勫巻鍙茶鎸傝繘 DOM 棰勬祴閲�,閬垮厤璐磋劯鏃舵墠淇 scrollTop
 const DEFAULT_ROW_HEIGHT = 76;
 const DEFAULT_THINK_HEIGHT = 46;
-const DEFAULT_ACT_HEIGHT = 34;     // 折叠态的动作 chip≈一行;展开后由 measureVisibleRows 实测纠偏
+const DEFAULT_ACT_HEIGHT = 34;     // 鎶樺彔鎬佺殑鍔ㄤ綔 chip鈮堜竴琛�;灞曞紑鍚庣敱 measureVisibleRows 瀹炴祴绾犲亸
 const DEFAULT_DAY_HEIGHT = 30;
 const DEFAULT_NEW_HEIGHT = 46;
-// ── DOM 回收(虚拟窗口)参数 ──
-// n ≤ DOM_WINDOW 时退化为全量渲染(= v78,常见几百~几千条手感零变化);超过才启用回收。
-const DOM_WINDOW = 2400;      // DOM 里最多物化的行数。真机调:测回收逻辑可临时设 200 强制触发,生产留大(2400)
-const DOM_PAD_UP = 1100;      // recenter 时视口上方保留行数
-const DOM_PAD_DOWN = 1100;    // recenter 时视口下方保留行数(PAD_UP+PAD_DOWN < DOM_WINDOW,留滞回带防抖)
-const DOM_EDGE = 600;         // 视口逼近物化边缘到 600 行内 → idle 时 recenter(远大于单次惯性行数,正常滚动碰不到 spacer)
-const SCROLL_IDLE_MS = 140;   // 滚动停止判定:惯性结束后再做卸载/插入
+// 鈹€鈹€ DOM 鍥炴敹(铏氭嫙绐楀彛)鍙傛暟 鈹€鈹€
+// n 鈮� DOM_WINDOW 鏃堕€€鍖栦负鍏ㄩ噺娓叉煋(= v78,甯歌鍑犵櫨~鍑犲崈鏉℃墜鎰熼浂鍙樺寲);瓒呰繃鎵嶅惎鐢ㄥ洖鏀躲€�
+const DOM_WINDOW = 2400;      // DOM 閲屾渶澶氱墿鍖栫殑琛屾暟銆傜湡鏈鸿皟:娴嬪洖鏀堕€昏緫鍙复鏃惰 200 寮哄埗瑙﹀彂,鐢熶骇鐣欏ぇ(2400)
+const DOM_PAD_UP = 1100;      // recenter 鏃惰鍙ｄ笂鏂逛繚鐣欒鏁�
+const DOM_PAD_DOWN = 1100;    // recenter 鏃惰鍙ｄ笅鏂逛繚鐣欒鏁�(PAD_UP+PAD_DOWN < DOM_WINDOW,鐣欐粸鍥炲甫闃叉姈)
+const DOM_EDGE = 600;         // 瑙嗗彛閫艰繎鐗╁寲杈圭紭鍒� 600 琛屽唴 鈫� idle 鏃� recenter(杩滃ぇ浜庡崟娆℃儻鎬ц鏁�,姝ｅ父婊氬姩纰颁笉鍒� spacer)
+const SCROLL_IDLE_MS = 140;   // 婊氬姩鍋滄鍒ゅ畾:鎯€х粨鏉熷悗鍐嶅仛鍗歌浇/鎻掑叆
 const CACHE_DB = "companion-message-cache";
 const CACHE_STORE = "messages";
 const CACHE_KEEP = 350;
@@ -4166,7 +4172,7 @@ let virtualRows = [];
 let rowHeights = new Map();
 let prefixSums = new Float64Array(1);
 let prefixSumsDirty = true;
-const nodeCache = new Map();   // vkey -> {el,sig}: 复用可见节点, 滚动不重建 <img>
+const nodeCache = new Map();   // vkey -> {el,sig}: 澶嶇敤鍙鑺傜偣, 婊氬姩涓嶉噸寤� <img>
 let messageSeq = 0;
 let newDividerBeforeKey = null;
 let renderQueued = false;
@@ -4180,37 +4186,83 @@ let loadingOlder = false;
 let hasMoreOlder = true;
 let lastScrollTop = 0;
 let scrollDir = 0;
-let scrolling = false;          // iOS 惯性滚动期间为 true:此时任何补偿(写 scrollTop)都会跟原生惯性打架 → 抖,故全部冻结
+let scrolling = false;          // iOS 鎯€ф粴鍔ㄦ湡闂翠负 true:姝ゆ椂浠讳綍琛ュ伩(鍐� scrollTop)閮戒細璺熷師鐢熸儻鎬ф墦鏋� 鈫� 鎶�,鏁呭叏閮ㄥ喕缁�
 let scrollIdleTimer = null;
-// ── DOM 回收窗口状态 ──
-let domStart = 0, domEnd = 0;            // 当前物化区间 [domStart,domEnd) into virtualRows
-let winTopKey = null, winBotKey = null;  // 区间两端 row.key:跨 buildVirtualRows 重建锁定同一批行
-let winAtTop = true, winAtBottom = true; // 上次渲染窗口是否贴顶/贴底 → 决定是否物化新 prepend/append 的行
-let rowIndexByKey = new Map();           // row.key → index,rebuild 时重建,O(1) 反查
+// 鈹€鈹€ DOM 鍥炴敹绐楀彛鐘舵€� 鈹€鈹€
+let domStart = 0, domEnd = 0;            // 褰撳墠鐗╁寲鍖洪棿 [domStart,domEnd) into virtualRows
+let winTopKey = null, winBotKey = null;  // 鍖洪棿涓ょ row.key:璺� buildVirtualRows 閲嶅缓閿佸畾鍚屼竴鎵硅
+let winAtTop = true, winAtBottom = true; // 涓婃娓叉煋绐楀彛鏄惁璐撮《/璐村簳 鈫� 鍐冲畾鏄惁鐗╁寲鏂� prepend/append 鐨勮
+let rowIndexByKey = new Map();           // row.key 鈫� index,rebuild 鏃堕噸寤�,O(1) 鍙嶆煡
 const openThinkKeys = new Set();
-const openActKeys = new Set();     // 哪些动作 chip 当前展开(与 openThinkKeys 同套机制)
+const openActKeys = new Set();     // 鍝簺鍔ㄤ綔 chip 褰撳墠灞曞紑(涓� openThinkKeys 鍚屽鏈哄埗)
 const topSpacer = document.createElement("div");
 const bottomSpacer = document.createElement("div");
 topSpacer.className = "v-spacer";
 bottomSpacer.className = "v-spacer";
 
-function tsMs(m){ return new Date(m.ts).getTime(); }
+// 鏃堕棿缁熶竴瀹归敊锛氬吋瀹� ISO銆丏ate銆佹绉掓椂闂存埑銆佺绾ф椂闂存埑锛屽苟閬垮厤浠讳綍 Invalid Date 娉勬紡鍒扮晫闈€€�
+function parseMessageDate(value){
+  if (value instanceof Date) return Number.isNaN(value.getTime()) ? null : value;
+  if (typeof value === "number" && Number.isFinite(value)){
+    const ms = Math.abs(value) < 1e12 ? value * 1000 : value;
+    const d = new Date(ms);
+    return Number.isNaN(d.getTime()) ? null : d;
+  }
+  if (typeof value === "string"){
+    const raw = value.trim();
+    if (!raw) return null;
+    if (/^\d+(?:\.\d+)?$/.test(raw)){
+      const n = Number(raw);
+      const d = new Date(Math.abs(n) < 1e12 ? n * 1000 : n);
+      return Number.isNaN(d.getTime()) ? null : d;
+    }
+    const d = new Date(raw);
+    return Number.isNaN(d.getTime()) ? null : d;
+  }
+  return null;
+}
+function messageTs(m){
+  if (!m || typeof m !== "object") return null;
+  return parseMessageDate(m.ts ?? m.timestamp ?? m.created_at ?? m.createdAt ?? m.time);
+}
+function tsMs(m){
+  const d = messageTs(m);
+  return d ? d.getTime() : 0;
+}
 
 const TZ = "Asia/Shanghai";  // pin all timestamps to Beijing time, independent of device TZ
 function fmtTime(ts){
-  return new Date(ts).toLocaleTimeString("zh-CN", { hour:"2-digit", minute:"2-digit", hour12:false, timeZone:TZ });
+  const d = parseMessageDate(ts);
+  if (!d) return "";
+  return d.toLocaleTimeString("zh-CN", { hour:"2-digit", minute:"2-digit", hour12:false, timeZone:TZ });
 }
-function dayKey(ts){ return new Date(ts).toLocaleDateString("en-CA", { timeZone:TZ }); }
+function dayKey(ts){
+  const d = parseMessageDate(ts);
+  return d ? d.toLocaleDateString("en-CA", { timeZone:TZ }) : "";
+}
 function fmtDay(ts){
-  const md = new Date(ts).toLocaleDateString("en-US", { month:"short", day:"2-digit", timeZone:TZ });
-  return `${md}, ${fmtTime(ts)}`;
+  const d = parseMessageDate(ts);
+  if (!d) return "";
+  const md = d.toLocaleDateString("en-US", { month:"short", day:"2-digit", timeZone:TZ });
+  const tm = fmtTime(d);
+  return tm ? `${md}, ${tm}` : md;
 }
 
+// 淇灏戞暟鍘嗗彶娑堟伅鍙兘鍑虹幇鐨� UTF-8 琚敊璇寜 Latin-1 瑙ｇ爜鍚庣殑涔辩爜锛涙甯镐腑鏂囦笉浼氳鏀瑰姩銆�
+function normalizeTextEncoding(value){
+  const s = String(value ?? "");
+  if (!/[脙脗忙莽猫茅锚毛茂冒帽貌贸么玫枚酶霉煤没眉每]/.test(s)) return s;
+  try{
+    const bytes = Uint8Array.from(s, ch => ch.charCodeAt(0) & 0xff);
+    const decoded = new TextDecoder("utf-8", { fatal:true }).decode(bytes);
+    return decoded.includes("锟�") ? s : decoded;
+  }catch(_){ return s; }
+}
 function escapeHtml(s){
   return String(s || "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 }
 function renderText(t){
-  let s = escapeHtml(t);
+  let s = escapeHtml(normalizeTextEncoding(t));
   s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
   s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   s = s.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
@@ -4219,11 +4271,11 @@ function renderText(t){
 }
 function attImgError(img){
   try{
-    if (img.dataset.failed || /^blob:/.test(img.src || "")) return;  // 本地预览/正在发的不动
+    if (img.dataset.failed || /^blob:/.test(img.src || "")) return;  // 鏈湴棰勮/姝ｅ湪鍙戠殑涓嶅姩
     img.dataset.failed = "1";
-    img.onerror = null;                                              // 只触发一次，杜绝循环
+    img.onerror = null;                                              // 鍙Е鍙戜竴娆★紝鏉滅粷寰幆
     const row = img.closest("[data-message-key]");
-    if (row && row.dataset.messageKey) removeMessage(row.dataset.messageKey);  // 删失效消息 + 更新缓存
+    if (row && row.dataset.messageKey) removeMessage(row.dataset.messageKey);  // 鍒犲け鏁堟秷鎭� + 鏇存柊缂撳瓨
   }catch(_){}
 }
 function attUrl(u){
@@ -4248,9 +4300,9 @@ function renderAttachments(atts){
       const src = localPreview.get(a.url) || a.localUrl || attUrl(a.url);
       const href = attUrl(a.url) || a.localUrl || "";
       const ratio = Number(a.width) > 0 && Number(a.height) > 0 ? Math.max(0.35, Math.min(2.6, Number(a.width) / Number(a.height))) : 1.04;
-      return `<a class="att-img-link${up}${fail}" style="--att-ratio:${ratio.toFixed(4)}" href="${escapeHtml(href)}" target="_blank" rel="noopener"><img class="att-img" decoding="async" src="${escapeHtml(src)}" alt="${escapeHtml(a.name || "图片")}" loading="lazy"></a>`;
+      return `<a class="att-img-link${up}${fail}" style="--att-ratio:${ratio.toFixed(4)}" href="${escapeHtml(href)}" target="_blank" rel="noopener"><img class="att-img" decoding="async" src="${escapeHtml(src)}" alt="${escapeHtml(a.name || "鍥剧墖")}" loading="lazy"></a>`;
     }
-    return `<a class="att-file${up}${fail}" href="${escapeHtml(attUrl(a.url))}" target="_blank" rel="noopener" download="${escapeHtml(a.name || "file")}"><span class="att-file-ic">${fileIconSvg()}</span><span class="att-file-meta"><span class="att-file-name">${escapeHtml(a.name || "文件")}</span><span class="att-file-size">${fmtSize(a.size)}${a.uploading ? " · 上传中…" : (a.failed ? " · 失败" : "")}</span></span></a>`;
+    return `<a class="att-file${up}${fail}" href="${escapeHtml(attUrl(a.url))}" target="_blank" rel="noopener" download="${escapeHtml(a.name || "file")}"><span class="att-file-ic">${fileIconSvg()}</span><span class="att-file-meta"><span class="att-file-name">${escapeHtml(a.name || "鏂囦欢")}</span><span class="att-file-size">${fmtSize(a.size)}${a.uploading ? " 路 涓婁紶涓€�" : (a.failed ? " 路 澶辫触" : "")}</span></span></a>`;
   }).join("");
 }
 function msgKey(id){ return String(id); }
@@ -4353,7 +4405,7 @@ function renderTerminal({ stickToBottom = false } = {}){
   terminalLog.innerHTML = html || `<div class="term-entry term-muted"># no messages in this window yet</div>`;
   if (terminalSession){
     const s = activeSessionObj();
-    terminalSession.textContent = s ? `${s.title || s.id} · same conversation stream` : "旧主线 / Desktop 记录 · same conversation stream";
+    terminalSession.textContent = s ? `${s.title || s.id} 路 same conversation stream` : "鏃т富绾� / Desktop 璁板綍 路 same conversation stream";
   }
   if (stick) terminalLog.scrollTop = terminalLog.scrollHeight;
 }
@@ -4468,7 +4520,7 @@ function resetChatState(){
 }
 function setMessage(raw, { render = true, cache = true } = {}){
   const key = msgKey(raw.id);
-  if (deletedKeys.has(key)) return undefined;   // 用户已在本地删除 → 任何来源(history/SSE/缓存)都不再收进来
+  if (deletedKeys.has(key)) return undefined;   // 鐢ㄦ埛宸插湪鏈湴鍒犻櫎 鈫� 浠讳綍鏉ユ簮(history/SSE/缂撳瓨)閮戒笉鍐嶆敹杩涙潵
   const existing = messageByKey.get(key);
   if (existing){
     Object.assign(existing, raw, { id: raw.id, meta: raw.meta || existing.meta || {}, _key: key });
@@ -4588,10 +4640,10 @@ function findRenderedMessageRow(key){
 }
 
 function fillMeta(metaEl, ts, isAn){
-  metaEl.innerHTML = `<span>${fmtTime(ts)}</span>` + (isAn ? `<span class="tick">✓✓</span>` : "");
+  metaEl.innerHTML = `<span>${fmtTime(ts)}</span>` + (isAn ? `<span class="tick">鉁撯湏</span>` : "");
 }
-// 发送中的小时钟:两根指针绕表心转(SMIL,旋转中心写死(12,12),不依赖 transform-box,iOS 稳)。
-// reduce-motion 时给一只静止的钟。状态转 sent 后此节点按签名重建 → 同位换成 ✓✓。
+// 鍙戦€佷腑鐨勫皬鏃堕挓:涓ゆ牴鎸囬拡缁曡〃蹇冭浆(SMIL,鏃嬭浆涓績鍐欐(12,12),涓嶄緷璧� transform-box,iOS 绋�)銆�
+// reduce-motion 鏃剁粰涓€鍙潤姝㈢殑閽熴€傜姸鎬佽浆 sent 鍚庢鑺傜偣鎸夌鍚嶉噸寤� 鈫� 鍚屼綅鎹㈡垚 鉁撯湏銆�
 function sendingTickHtml(){
   const face = '<circle cx="12" cy="12" r="8.2"/>';
   const open = '<span class="tick clock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">';
@@ -4630,7 +4682,7 @@ function buildVirtualRows(){
     }
     if (m.kind === "act"){
       rows.push({ type:"act", key:`m:${m._key}`, message:m });
-      prevBubble = null;                            // 像 thinking 一样打断气泡成组
+      prevBubble = null;                            // 鍍� thinking 涓€鏍锋墦鏂皵娉℃垚缁�
       return;
     }
     const t = tsMs(m);
@@ -4642,19 +4694,19 @@ function buildVirtualRows(){
   });
   return rows;
 }
-// 内容感知估高:按气泡内宽估文本折行 + 附件高度,首屏估值贴近真实高度→measureVisibleRows
-// 纠偏量骤降(上滑进未测行时 restoreAnchor 的 scrollTop 补偿从 ~2000px 级降到 ~50px)。
-// charsPerLine 只在首次/转屏时算一次缓存——绝不每行读 window.innerWidth(那会每行触发 reflow,上次翻车主因)。
+// 鍐呭鎰熺煡浼伴珮:鎸夋皵娉″唴瀹戒及鏂囨湰鎶樿 + 闄勪欢楂樺害,棣栧睆浼板€艰创杩戠湡瀹為珮搴︹啋measureVisibleRows
+// 绾犲亸閲忛闄�(涓婃粦杩涙湭娴嬭鏃� restoreAnchor 鐨� scrollTop 琛ュ伩浠� ~2000px 绾ч檷鍒� ~50px)銆�
+// charsPerLine 鍙湪棣栨/杞睆鏃剁畻涓€娆＄紦瀛樷€斺€旂粷涓嶆瘡琛岃 window.innerWidth(閭ｄ細姣忚瑙﹀彂 reflow,涓婃缈昏溅涓诲洜)銆�
 let _estCpl = 0;
 function estCharsPerLine(){
   if (_estCpl) return _estCpl;
-  const w = Math.min(window.innerWidth * 0.61, 506) - 24;   // .bubble max-width: min(61vw,506px) 减内边距
-  return (_estCpl = Math.max(8, w / 16));        // 每行≈「全宽字」单位数;半角在 estTextHeight 里按 0.5 计
+  const w = Math.min(window.innerWidth * 0.61, 506) - 24;   // .bubble max-width: min(61vw,506px) 鍑忓唴杈硅窛
+  return (_estCpl = Math.max(8, w / 16));        // 姣忚鈮堛€屽叏瀹藉瓧銆嶅崟浣嶆暟;鍗婅鍦� estTextHeight 閲屾寜 0.5 璁�
 }
-window.addEventListener("resize", () => {                    // 转屏/缩放重算一次(不是每行)
+window.addEventListener("resize", () => {                    // 杞睆/缂╂斁閲嶇畻涓€娆�(涓嶆槸姣忚)
   _estCpl = 0;
   prefixSumsDirty = true;
-  rowHeights.clear();                                        // 宽度变→所有测高失效;spacer 暂用新估高,measure 停下后精修
+  rowHeights.clear();                                        // 瀹藉害鍙樷啋鎵€鏈夋祴楂樺け鏁�;spacer 鏆傜敤鏂颁及楂�,measure 鍋滀笅鍚庣簿淇�
   scheduleRender({ preserveAnchor: true });
 });
 function estTextHeight(text){
@@ -4663,10 +4715,10 @@ function estTextHeight(text){
   let lines = 0;
   for (const seg of String(text).split("\n")) {
     let units = 0;
-    for (let i = 0; i < seg.length; i++) units += seg.charCodeAt(i) < 256 ? 0.5 : 1;  // 半角(ASCII/拉丁)按0.5,CJK 等按1
+    for (let i = 0; i < seg.length; i++) units += seg.charCodeAt(i) < 256 ? 0.5 : 1;  // 鍗婅(ASCII/鎷変竵)鎸�0.5,CJK 绛夋寜1
     lines += Math.max(1, Math.ceil(units / perLine));
   }
-  return lines * 25;                                          // line-height 1.58 × ~16px
+  return lines * 25;                                          // line-height 1.58 脳 ~16px
 }
 function estImageHeight(a){
   const ratio = Number(a && a.width) > 0 && Number(a && a.height) > 0 ? Math.max(0.35, Math.min(2.6, Number(a.width) / Number(a.height))) : 1.04;
@@ -4681,7 +4733,7 @@ function estimatedHeight(row){
   if (row.type === "act") return DEFAULT_ACT_HEIGHT;
   const m = row.message;
   const atts = (m && m.meta && Array.isArray(m.meta.attachments)) ? m.meta.attachments : [];
-  let h = (row.grouped ? 8 : 22) + 30;                        // 行间距 + 气泡纵向 padding + meta 行
+  let h = (row.grouped ? 8 : 22) + 30;                        // 琛岄棿璺� + 姘旀场绾靛悜 padding + meta 琛�
   for (const a of atts) h += a.kind === "image" ? estImageHeight(a) : 56;
   h += estTextHeight(m && m.text);
   return Math.max(h, DEFAULT_ROW_HEIGHT);
@@ -4746,9 +4798,9 @@ function makeThinking(rowData){
   block.className = "think-block";
   const star = `<span class="think-star" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c.8 5 3.5 7.7 8.5 8.5-5 .8-7.7 3.5-8.5 8.5-.8-5-3.5-7.7-8.5-8.5 5-.8 7.7-3.5 8.5-8.5Z"/></svg></span>`;
   block.innerHTML = `
-    <button class="think-toggle" type="button" aria-expanded="false" aria-label="展开思绪">
+    <button class="think-toggle" type="button" aria-expanded="false" aria-label="灞曞紑鎬濈华">
       <span class="think-rule" aria-hidden="true"></span>
-      <span class="think-caption"><span class="think-caption-star" aria-hidden="true">✦</span><span>thinking</span><span class="think-state" aria-hidden="true"></span></span>
+      <span class="think-caption"><span class="think-caption-star" aria-hidden="true">鉁�</span><span>thinking</span><span class="think-state" aria-hidden="true"></span></span>
     </button>
     <div class="think-body" hidden>
       <div class="think-text"><span class="think-copy">${renderText(m.text)}</span></div>
@@ -4761,7 +4813,7 @@ function makeThinking(rowData){
     row.classList.toggle("think-open", open);
     body.hidden = !open;
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "收起思绪" : "展开思绪");
+    toggle.setAttribute("aria-label", open ? "鏀惰捣鎬濈华" : "灞曞紑鎬濈华");
     if (persist){
       if (open) openThinkKeys.add(m._key); else openThinkKeys.delete(m._key);
       scheduleRender({ preserveAnchor: true });
@@ -4772,17 +4824,17 @@ function makeThinking(rowData){
   if (openThinkKeys.has(m._key)) setThinkOpen(true, { persist:false });
   return row;
 }
-/* ── 动作 chip(kind:"act") ──
+/* 鈹€鈹€ 鍔ㄤ綔 chip(kind:"act") 鈹€鈹€
    contract: m.text = a friendly phrase (e.g. "looked at notes" / "ran 3 commands"); the AI name is prefixed by the UI;
-   m.meta.glyph = 字形提示(memory→✦ / terminal→∞ …,缺省 ✦);
-   m.meta.steps = 可选的原始工具调用 [{tool,cmd,result}…],非空才显示「· 展开」。
-   字段也容忍平铺在 meta 顶层(relay 把 /channel/out 的 body 摊进 meta)。 */
+   m.meta.glyph = 瀛楀舰鎻愮ず(memory鈫掆湨 / terminal鈫掆垶 鈥�,缂虹渷 鉁�);
+   m.meta.steps = 鍙€夌殑鍘熷宸ュ叿璋冪敤 [{tool,cmd,result}鈥,闈炵┖鎵嶆樉绀恒€屄� 灞曞紑銆嶃€�
+   瀛楁涔熷蹇嶅钩閾哄湪 meta 椤跺眰(relay 鎶� /channel/out 鐨� body 鎽婅繘 meta)銆� */
 function actGlyph(name){
   switch (name){
-    case "terminal": case "shell": case "loop": return "∞";
-    case "search": case "grep": return "✱";
-    case "web": case "fetch": return "❍";
-    case "memory": case "spark": default: return "✦";
+    case "terminal": case "shell": case "loop": return "鈭�";
+    case "search": case "grep": return "鉁�";
+    case "web": case "fetch": return "鉂�";
+    case "memory": case "spark": default: return "鉁�";
   }
 }
 function renderActStep(s){
@@ -4795,10 +4847,10 @@ function renderActStep(s){
 function makeAct(rowData){
   const m = rowData.message;
   const meta = m.meta || {};
-  const a = (meta.act && typeof meta.act === "object") ? meta.act : meta;   // 嵌套或平铺都吃
+  const a = (meta.act && typeof meta.act === "object") ? meta.act : meta;   // 宓屽鎴栧钩閾洪兘鍚�
   const steps = (Array.isArray(a.steps) ? a.steps : []).map(renderActStep).filter(Boolean);
   const glyph = actGlyph(a.glyph || meta.glyph);
-  const label = m.text || "做了点什么";
+  const label = m.text || "鍋氫簡鐐逛粈涔�";
   const expandable = steps.length > 0;
 
   const row = document.createElement("div");
@@ -4808,7 +4860,7 @@ function makeAct(rowData){
   const block = document.createElement("div");
   block.className = "act-block";
   block.innerHTML =
-    `<button class="act-toggle${expandable ? "" : " bare"}" type="button"${expandable ? ' aria-expanded="false" aria-label="展开工具明细"' : ' tabindex="-1"'}>`
+    `<button class="act-toggle${expandable ? "" : " bare"}" type="button"${expandable ? ' aria-expanded="false" aria-label="灞曞紑宸ュ叿鏄庣粏"' : ' tabindex="-1"'}>`
       + `<span class="act-glyph" aria-hidden="true">${glyph}</span>`
       + `<span class="act-label">${escapeHtml(AI_NAME + label)}</span>`
       + (expandable ? `<span class="act-state" aria-hidden="true"></span>` : "")
@@ -4819,10 +4871,10 @@ function makeAct(rowData){
     const toggle = block.querySelector(".act-toggle");
     const detail = block.querySelector(".act-detail");
     const setActOpen = (open, { persist = true } = {}) => {
-      block.classList.toggle("open", open);             // 翻转空心/实心星
+      block.classList.toggle("open", open);             // 缈昏浆绌哄績/瀹炲績鏄�
       detail.hidden = !open;
       toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "收起工具明细" : "展开工具明细");
+      toggle.setAttribute("aria-label", open ? "鏀惰捣宸ュ叿鏄庣粏" : "灞曞紑宸ュ叿鏄庣粏");
       if (persist){
         if (open) openActKeys.add(m._key); else openActKeys.delete(m._key);
         scheduleRender({ preserveAnchor: true });
@@ -4839,7 +4891,7 @@ function makeMessage(rowData){
   const row = document.createElement("div");
   row.className = `row ${m.from === "human" ? "human" : "ai"}${rowData.grouped ? " grouped" : ""}${rowData.tail ? " tail" : ""}`;
   row.dataset.id = m.id; row.dataset.from = m.from; row.dataset.ts = tsMs(m); row.dataset.messageKey = m._key;
-  if (freshKeys.has(m._key)){                       // 只对刚发/刚收到的那条播一次入场动画
+  if (freshKeys.has(m._key)){                       // 鍙鍒氬彂/鍒氭敹鍒扮殑閭ｆ潯鎾竴娆″叆鍦哄姩鐢�
     const cls = m.from === "human" ? "enter-human" : "enter-ai";
     row.classList.add(cls);
     freshKeys.delete(m._key);
@@ -4858,7 +4910,7 @@ function makeMessage(rowData){
   const metaEl = bubble.querySelector(".meta");
   if (m.status === "sending") metaEl.innerHTML = `<span>${fmtTime(m.ts)}</span>` + sendingTickHtml();
   else if (m.status === "failed"){
-    metaEl.innerHTML = `<span class="fail">未送达 · 重试</span>`;
+    metaEl.innerHTML = `<span class="fail">鏈€佽揪 路 閲嶈瘯</span>`;
     const fail = metaEl.querySelector(".fail");
     fail.addEventListener("click", () => {
       removeMessage(m._key);
@@ -4868,7 +4920,7 @@ function makeMessage(rowData){
     });
   }else fillMeta(metaEl, m.ts, m.from === "human");
   row.appendChild(bubble);
-  // reaction chips — AI poke (one-way: AI → you), rendered only under your own bubbles; not under the AI's
+  // reaction chips 鈥� AI poke (one-way: AI 鈫� you), rendered only under your own bubbles; not under the AI's
   const reactions = (m.from === "human" && m.meta && m.meta.reactions && typeof m.meta.reactions === "object") ? m.meta.reactions : null;
   const rxList = reactions ? Object.keys(reactions).map((who) => reactions[who]).filter(Boolean) : [];
   if (rxList.length){
@@ -4900,7 +4952,7 @@ function measureVisibleRows({ stickToBottom = false } = {}){
   measureQueued = true;
   requestAnimationFrame(() => {
     measureQueued = false;
-    if (scrolling) return;        // 滚动中不测量、不修正:测量→改 prefixSums→restoreAnchor 写 scrollTop 会抖,推迟到停下精修
+    if (scrolling) return;        // 婊氬姩涓笉娴嬮噺銆佷笉淇:娴嬮噺鈫掓敼 prefixSums鈫抮estoreAnchor 鍐� scrollTop 浼氭姈,鎺ㄨ繜鍒板仠涓嬬簿淇�
     let changed = false;
     for (const el of scrollEl.children){
       if (!el.dataset || !el.dataset.vkey) continue;
@@ -4929,23 +4981,23 @@ function virtualRowSignature(row){
   }
   return row.key;
 }
-/* ════════════ DOM 回收(虚拟窗口) ════════════
-   几万条时 DOM 节点本身吃内存、拖慢布局。窗口化:virtualRows 全量在内存,DOM 里只物化 [domStart,domEnd),
-   两端 spacer 占位(高=区间外行高之和)。卸载/插入只在【滚动 idle】做(见 onScrollIdle),绝不碰惯性滚动 → 守丝滑命根。
-   n ≤ DOM_WINDOW 时退化为全量渲染(= v78),回收只在大列表启用。 */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 DOM 鍥炴敹(铏氭嫙绐楀彛) 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲
+   鍑犱竾鏉℃椂 DOM 鑺傜偣鏈韩鍚冨唴瀛樸€佹嫋鎱㈠竷灞€銆傜獥鍙ｅ寲:virtualRows 鍏ㄩ噺鍦ㄥ唴瀛�,DOM 閲屽彧鐗╁寲 [domStart,domEnd),
+   涓ょ spacer 鍗犱綅(楂�=鍖洪棿澶栬楂樹箣鍜�)銆傚嵏杞�/鎻掑叆鍙湪銆愭粴鍔� idle銆戝仛(瑙� onScrollIdle),缁濅笉纰版儻鎬ф粴鍔� 鈫� 瀹堜笣婊戝懡鏍广€�
+   n 鈮� DOM_WINDOW 鏃堕€€鍖栦负鍏ㄩ噺娓叉煋(= v78),鍥炴敹鍙湪澶у垪琛ㄥ惎鐢ㄣ€� */
 function sumHeights(a, b){
   let s = 0;
   for (let i = a; i < b; i++){
     const r = virtualRows[i];
     const h = rowHeights.get(r.key);
-    s += (h != null ? h : estimatedHeight(r));   // 测过的用真高,没测过的用内容感知估高
+    s += (h != null ? h : estimatedHeight(r));   // 娴嬭繃鐨勭敤鐪熼珮,娌℃祴杩囩殑鐢ㄥ唴瀹规劅鐭ヤ及楂�
   }
   return s;
 }
 function indexOfRowKey(key){
   return rowIndexByKey.has(key) ? rowIndexByKey.get(key) : -1;
 }
-// 视口当前覆盖的 virtualRows 索引范围(只扫已物化的 DOM 行,≤DOM_WINDOW 个,跳过 spacer)
+// 瑙嗗彛褰撳墠瑕嗙洊鐨� virtualRows 绱㈠紩鑼冨洿(鍙壂宸茬墿鍖栫殑 DOM 琛�,鈮OM_WINDOW 涓�,璺宠繃 spacer)
 function viewportRowRange(){
   const box = scrollEl.getBoundingClientRect();
   let start = -1, end = -1;
@@ -4960,7 +5012,7 @@ function viewportRowRange(){
   }
   return start < 0 ? null : { start, end };
 }
-// 按内容 y 走累积行高定位该位置是第几行(只在视口落进 spacer、无物化行可锚时用 → O(n) 兜底,正常路径走 viewportRowRange)
+// 鎸夊唴瀹� y 璧扮疮绉楂樺畾浣嶈浣嶇疆鏄鍑犺(鍙湪瑙嗗彛钀借繘 spacer銆佹棤鐗╁寲琛屽彲閿氭椂鐢� 鈫� O(n) 鍏滃簳,姝ｅ父璺緞璧� viewportRowRange)
 function rowIndexAtY(y){
   let acc = 0;
   for (let i = 0; i < virtualRows.length; i++){
@@ -4971,37 +5023,37 @@ function rowIndexAtY(y){
   }
   return Math.max(0, virtualRows.length - 1);
 }
-// 视口覆盖的行索引范围:优先用物化行;若视口落进 spacer(无物化行)则按 scrollTop 推算 → 防止 recenter 时 snap 错位
+// 瑙嗗彛瑕嗙洊鐨勮绱㈠紩鑼冨洿:浼樺厛鐢ㄧ墿鍖栬;鑻ヨ鍙ｈ惤杩� spacer(鏃犵墿鍖栬)鍒欐寜 scrollTop 鎺ㄧ畻 鈫� 闃叉 recenter 鏃� snap 閿欎綅
 function viewportCenterRange(){
   const v = viewportRowRange();
   if (v) return v;
   const c = rowIndexAtY(scrollEl.scrollTop + scrollEl.clientHeight / 2);
   return { start: c, end: c };
 }
-// 决定本次渲染物化哪段 [domStart,domEnd)。stick=贴底;recenter=idle 居中(唯一允许卸载/滑窗处);否则内容变更(锁定同批行)
+// 鍐冲畾鏈娓叉煋鐗╁寲鍝 [domStart,domEnd)銆俿tick=璐村簳;recenter=idle 灞呬腑(鍞竴鍏佽鍗歌浇/婊戠獥澶�);鍚﹀垯鍐呭鍙樻洿(閿佸畾鍚屾壒琛�)
 function resolveWindow(n, { stickToBottom, recenter }){
   if (n <= DOM_WINDOW){
-    domStart = 0; domEnd = n;                           // 小列表:全量渲染 = v78
+    domStart = 0; domEnd = n;                           // 灏忓垪琛�:鍏ㄩ噺娓叉煋 = v78
   } else if (stickToBottom){
-    domEnd = n; domStart = Math.max(0, n - DOM_WINDOW); // 贴底:物化最新一批
+    domEnd = n; domStart = Math.max(0, n - DOM_WINDOW); // 璐村簳:鐗╁寲鏈€鏂颁竴鎵�
   } else if (recenter){
-    const v = viewportCenterRange();                   // 视口落进 spacer 也能定位(不再 snap 回底)
+    const v = viewportCenterRange();                   // 瑙嗗彛钀借繘 spacer 涔熻兘瀹氫綅(涓嶅啀 snap 鍥炲簳)
     let s = v.start - DOM_PAD_UP, e = v.end + 1 + DOM_PAD_DOWN;
     if (s < 0){ e -= s; s = 0; }
     if (e > n){ s -= (e - n); e = n; }
     domStart = Math.max(0, s); domEnd = Math.min(n, e);
   } else {
-    // 内容变更:用 key 锁定上次那批行;按上次贴边状态决定是否物化新 prepend(loadOlder)/append(新消息)的行
+    // 鍐呭鍙樻洿:鐢� key 閿佸畾涓婃閭ｆ壒琛�;鎸変笂娆¤创杈圭姸鎬佸喅瀹氭槸鍚︾墿鍖栨柊 prepend(loadOlder)/append(鏂版秷鎭�)鐨勮
     const prevTop = winAtTop, prevBot = winAtBottom;
     let s = (winTopKey != null) ? indexOfRowKey(winTopKey) : -1;
     let e = (winBotKey != null) ? indexOfRowKey(winBotKey) : -1;
     e = (e >= 0) ? e + 1 : -1;
-    if (s < 0 || e < 0){                                // 锚点行被删了 → 退回视口居中
+    if (s < 0 || e < 0){                                // 閿氱偣琛岃鍒犱簡 鈫� 閫€鍥炶鍙ｅ眳涓�
       const v = viewportCenterRange();
       s = Math.max(0, v.start - DOM_PAD_UP); e = Math.min(n, v.end + 1 + DOM_PAD_DOWN);
     }
-    if (prevTop) s = 0;                                 // 上次贴顶 → 继续物化新 prepend 的行(随 loadOlder 上翻)
-    if (prevBot) e = n;                                 // 上次贴底 → 继续物化新到的消息
+    if (prevTop) s = 0;                                 // 涓婃璐撮《 鈫� 缁х画鐗╁寲鏂� prepend 鐨勮(闅� loadOlder 涓婄炕)
+    if (prevBot) e = n;                                 // 涓婃璐村簳 鈫� 缁х画鐗╁寲鏂板埌鐨勬秷鎭�
     domStart = Math.max(0, Math.min(s, n));
     domEnd = Math.max(domStart, Math.min(e, n));
   }
@@ -5043,14 +5095,14 @@ function paintWindow(n){
     if (ref !== node) scrollEl.insertBefore(node, ref);
     prev = node;
   }
-  if (nodeCache.size > DOM_WINDOW + 200){               // 只缓存窗口附近的节点:卸载的行节点丢弃(回滚需要时重建,走浏览器 HTTP 缓存)
+  if (nodeCache.size > DOM_WINDOW + 200){               // 鍙紦瀛樼獥鍙ｉ檮杩戠殑鑺傜偣:鍗歌浇鐨勮鑺傜偣涓㈠純(鍥炴粴闇€瑕佹椂閲嶅缓,璧版祻瑙堝櫒 HTTP 缂撳瓨)
     const keep = new Set(slice.map((r) => r.key));
     for (const k of nodeCache.keys()) if (!keep.has(k)) nodeCache.delete(k);
   }
   renderedSignature = signature;
 }
-// 物化行停下后测真高存 rowHeights(供日后该行被卸载进 spacer 时算准占位高)。不触发重渲,滚动中跳过。
-// reStick:本次是贴底渲染 → 估高被实测修正、总高变化后重新对齐到底(否则首次大列表贴底会差一截)。
+// 鐗╁寲琛屽仠涓嬪悗娴嬬湡楂樺瓨 rowHeights(渚涙棩鍚庤琛岃鍗歌浇杩� spacer 鏃剁畻鍑嗗崰浣嶉珮)銆備笉瑙﹀彂閲嶆覆,婊氬姩涓烦杩囥€�
+// reStick:鏈鏄创搴曟覆鏌� 鈫� 浼伴珮琚疄娴嬩慨姝ｃ€佹€婚珮鍙樺寲鍚庨噸鏂板榻愬埌搴�(鍚﹀垯棣栨澶у垪琛ㄨ创搴曚細宸竴鎴�)銆�
 function scheduleMeasure(reStick){
   if (measureQueued){ if (reStick) scheduleMeasure._stick = true; return; }
   measureQueued = true;
@@ -5066,10 +5118,10 @@ function scheduleMeasure(reStick){
       const old = rowHeights.get(el.dataset.vkey);
       if (!old || Math.abs(old - h) > 1){ rowHeights.set(el.dataset.vkey, h); changed = true; }
     }
-    if (changed && scheduleMeasure._stick && winAtBottom) jumpToBottom();   // 贴底态:总高变了重新对齐到最新
+    if (changed && scheduleMeasure._stick && winAtBottom) jumpToBottom();   // 璐村簳鎬�:鎬婚珮鍙樹簡閲嶆柊瀵归綈鍒版渶鏂�
   });
 }
-// 把 scrollTop 直接钉到底(下一帧)。前提:调用前窗口已贴底(domEnd===n,最新行已物化),否则会落进 bottomSpacer 空白。
+// 鎶� scrollTop 鐩存帴閽夊埌搴�(涓嬩竴甯�)銆傚墠鎻�:璋冪敤鍓嶇獥鍙ｅ凡璐村簳(domEnd===n,鏈€鏂拌宸茬墿鍖�),鍚﹀垯浼氳惤杩� bottomSpacer 绌虹櫧銆�
 function jumpToBottom(){
   requestAnimationFrame(() => { scrollEl.scrollTop = scrollEl.scrollHeight; });
 }
@@ -5091,8 +5143,8 @@ function renderVirtualList({ stickToBottom = false, anchor = null, recenter = fa
   emptyEl.classList.add("hidden");
   resolveWindow(n, { stickToBottom, recenter });
   paintWindow(n);
-  if (anchor) restoreAnchor(anchor);              // 同步补偿:与 spacer 改高同帧,消除上滑「先跳后补」的整屏抖动
-  if (stickToBottom) jumpToBottom();              // resolveWindow 已让 domEnd=n,最新行已物化,直接钉到底(不再回调 scrollToBottom 避免递归)
+  if (anchor) restoreAnchor(anchor);              // 鍚屾琛ュ伩:涓� spacer 鏀归珮鍚屽抚,娑堥櫎涓婃粦銆屽厛璺冲悗琛ャ€嶇殑鏁村睆鎶栧姩
+  if (stickToBottom) jumpToBottom();              // resolveWindow 宸茶 domEnd=n,鏈€鏂拌宸茬墿鍖�,鐩存帴閽夊埌搴�(涓嶅啀鍥炶皟 scrollToBottom 閬垮厤閫掑綊)
   scheduleMeasure(stickToBottom);
 }
 function scheduleRender({ stickToBottom = false, preserveAnchor = false, anchorOverride = null } = {}){
@@ -5287,10 +5339,10 @@ function onMessage(m){
     return;
   }
   if (m.type === "context_command"){
-    showToast("上下文指令已排队");
+    showToast("涓婁笅鏂囨寚浠ゅ凡鎺掗槦");
     return;
   }
-  if (m.type === "reaction"){            // the AI reacted to a message → patch its meta.reactions
+  if (m.type === "reaction"){            // the AI reacted to a message 鈫� patch its meta.reactions
     hideTyping();                         // a react also means the AI acted: a react-only turn won't send a reply to clear typing, so clear it here
     applyReaction(m);
     return;
@@ -5298,7 +5350,7 @@ function onMessage(m){
   if (m.from === "ai" && m.kind === "call"){
     if (!msgInActiveSession(m)) return;
     const callStick = nearBottom();
-    if (window.VoiceCall) window.VoiceCall.incoming(m.text || (AI_NAME + "想和你语音通话。"));
+    if (window.VoiceCall) window.VoiceCall.incoming(m.text || (AI_NAME + "鎯冲拰浣犺闊抽€氳瘽銆�"));
     setMessage({ ...m, status:"sent" }, { render:false });
     scheduleRender({ stickToBottom: callStick });
     if (!callStick) showNewMsgPill();
@@ -5319,14 +5371,14 @@ function onMessage(m){
     return;
   }
   seen.add(key);
-  if (stick && m.kind !== "thinking" && m.kind !== "act") freshKeys.add(key);          // 在底部时新消息弹入
-  if (m.from === "ai" && m.kind !== "thinking" && m.kind !== "act"){               // act 是环境信息:不响铃、不在通话里朗读
+  if (stick && m.kind !== "thinking" && m.kind !== "act") freshKeys.add(key);          // 鍦ㄥ簳閮ㄦ椂鏂版秷鎭脊鍏�
+  if (m.from === "ai" && m.kind !== "thinking" && m.kind !== "act"){               // act 鏄幆澧冧俊鎭�:涓嶅搷閾冦€佷笉鍦ㄩ€氳瘽閲屾湕璇�
     playReceiveSound();
     if (window.VoiceCall && window.VoiceCall.isOpen()) window.VoiceCall.speak(m.text || "");
   }
   setMessage({ ...m, status:"sent" }, { render:false });
   scheduleRender({ stickToBottom: stick });
-  if (!stick && m.from === "ai" && m.kind !== "thinking" && m.kind !== "act") showNewMsgPill();  // user is reading history: don't yank them down, just show "↓ new message" at the bottom
+  if (!stick && m.from === "ai" && m.kind !== "thinking" && m.kind !== "act") showNewMsgPill();  // user is reading history: don't yank them down, just show "鈫� new message" at the bottom
 }
 
 function backfill(){
@@ -5337,14 +5389,14 @@ function backfill(){
   }).catch(() => {}).finally(() => { backfillInFlight = false; });
 }
 
-/* ════════════ reaction · AI poke (one-way: AI → you) ════════════
-   relay pushes {type:"reaction", id, reactions:{ai:"❤️"}, by:"ai"};
-   we swap that message's meta.reactions → re-render the chip under the bubble.
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 reaction 路 AI poke (one-way: AI 鈫� you) 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲
+   relay pushes {type:"reaction", id, reactions:{ai:"鉂わ笍"}, by:"ai"};
+   we swap that message's meta.reactions 鈫� re-render the chip under the bubble.
    reactions persist in the target message's meta (history + cache), so they survive reloads. */
 function applyReaction(ev){
   const key = msgKey(ev.id);
   const msg = messageByKey.get(key);
-  if (!msg) return;                                  // 这条还没加载(很旧) → 下次 history 重载会带上,忽略即可
+  if (!msg) return;                                  // 杩欐潯杩樻病鍔犺浇(寰堟棫) 鈫� 涓嬫 history 閲嶈浇浼氬甫涓�,蹇界暐鍗冲彲
   const reactions = (ev.reactions && typeof ev.reactions === "object") ? ev.reactions : {};
   msg.meta = { ...(msg.meta || {}), reactions };
   const hasAny = Object.values(reactions).some(Boolean);
@@ -5358,7 +5410,7 @@ function applyReaction(ev){
   scheduleCacheSave();
 }
 
-/* ════════════ 长按气泡 · 复制菜单 (TG 式:遮罩 + 抬起 + 动作条) ════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 闀挎寜姘旀场 路 澶嶅埗鑿滃崟 (TG 寮�:閬僵 + 鎶捣 + 鍔ㄤ綔鏉�) 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 (function setupMessageMenu(){
   const menu = $("#msgMenu");
   if (!menu) return;
@@ -5366,7 +5418,7 @@ function applyReaction(ev){
   const actions = $("#msgMenuActions");
   let cloneEl = null, pressTimer = null, pressBubble = null, openKey = null;
   let startX = 0, startY = 0;
-  let swallowClick = false;   // 长按弹出后,iOS 会补发一个合成 click → 吞掉它,免得菜单刚开就被关
+  let swallowClick = false;   // 闀挎寜寮瑰嚭鍚�,iOS 浼氳ˉ鍙戜竴涓悎鎴� click 鈫� 鍚炴帀瀹�,鍏嶅緱鑿滃崟鍒氬紑灏辫鍏�
 
   const isOpen = () => menu.classList.contains("open");
   function clearPress(){ if (pressTimer){ clearTimeout(pressTimer); pressTimer = null; } pressBubble = null; }
@@ -5383,12 +5435,12 @@ function applyReaction(ev){
     if (isOpen()) return;
     const info = bubbleInfo(bubble);
     if (!info) return;
-    try{ const ae = document.activeElement; if (ae && (ae.tagName === "TEXTAREA" || ae.tagName === "INPUT")) ae.blur(); }catch(_){}  // 聚焦的输入框长按时会弹自己的原生菜单 → 先失焦
+    try{ const ae = document.activeElement; if (ae && (ae.tagName === "TEXTAREA" || ae.tagName === "INPUT")) ae.blur(); }catch(_){}  // 鑱氱劍鐨勮緭鍏ユ闀挎寜鏃朵細寮硅嚜宸辩殑鍘熺敓鑿滃崟 鈫� 鍏堝け鐒�
     openKey = info.key;
     const copyBtn = actions.querySelector('[data-act="copy"]');
-    if (copyBtn) copyBtn.style.display = info.msg.text ? "" : "none";   // 纯图无文字 → 只留 Delete
+    if (copyBtn) copyBtn.style.display = info.msg.text ? "" : "none";   // 绾浘鏃犳枃瀛� 鈫� 鍙暀 Delete
     const r = bubble.getBoundingClientRect();
-    // 1) 克隆气泡,固定原位,准备轻微抬起
+    // 1) 鍏嬮殕姘旀场,鍥哄畾鍘熶綅,鍑嗗杞诲井鎶捣
     cloneEl = bubble.cloneNode(true);
     cloneEl.classList.add("msg-menu-clone", info.side === "human" ? "clone-human" : "clone-ai");
     cloneEl.style.left = r.left + "px";
@@ -5396,7 +5448,7 @@ function applyReaction(ev){
     cloneEl.style.width = r.width + "px";
     cloneEl.style.transformOrigin = info.side === "human" ? "100% 100%" : "0% 100%";
     menu.insertBefore(cloneEl, actions);
-    // 2) 动作条:贴气泡同侧,默认在下方,空间不够翻上方
+    // 2) 鍔ㄤ綔鏉�:璐存皵娉″悓渚�,榛樿鍦ㄤ笅鏂�,绌洪棿涓嶅缈讳笂鏂�
     actions.style.visibility = "hidden";
     menu.classList.add("open");
     menu.setAttribute("aria-hidden", "false");
@@ -5429,8 +5481,8 @@ function applyReaction(ev){
       document.body.appendChild(ta); ta.focus(); ta.select();
       const ok = document.execCommand("copy");
       document.body.removeChild(ta);
-      showToast(ok ? "已复制" : "复制失败");
-    }catch(_){ showToast("复制失败"); }
+      showToast(ok ? "宸插鍒�" : "澶嶅埗澶辫触");
+    }catch(_){ showToast("澶嶅埗澶辫触"); }
   }
   function doCopy(){
     const msg = openKey != null ? messageByKey.get(msgKey(openKey)) : null;
@@ -5438,32 +5490,32 @@ function applyReaction(ev){
     close();
     if (!text) return;
     if (navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(() => showToast("已复制")).catch(() => fallbackCopy(text));
+      navigator.clipboard.writeText(text).then(() => showToast("宸插鍒�")).catch(() => fallbackCopy(text));
     } else fallbackCopy(text);
   }
   function doDelete(){
-    const key = openKey;                       // close() 会清空 openKey,先抓住
+    const key = openKey;                       // close() 浼氭竻绌� openKey,鍏堟姄浣�
     close();
     if (key == null) return;
-    deletedKeys.add(msgKey(key));              // 记下来 → 刷新/backfill 都不会让它跑回来
+    deletedKeys.add(msgKey(key));              // 璁颁笅鏉� 鈫� 鍒锋柊/backfill 閮戒笉浼氳瀹冭窇鍥炴潵
     persistDeletedKeys();
-    removeMessage(key);                        // 从内存 + IndexedDB 缓存移除并重渲
-    showToast("已删除");
+    removeMessage(key);                        // 浠庡唴瀛� + IndexedDB 缂撳瓨绉婚櫎骞堕噸娓�
+    showToast("宸插垹闄�");
   }
 
-  // 长按检测 —— 用 touch 事件自己计时。不用 pointer:iOS 一识别长按就给页面发 pointercancel,
-  // 会把计时器掐掉、让原生选择/复制接管(就是"打架"的根因);touch 不会被这样取消。
-  // 原生选择/callout 由 CSS 的 user-select:none / -webkit-touch-callout:none 压住。
+  // 闀挎寜妫€娴� 鈥斺€� 鐢� touch 浜嬩欢鑷繁璁℃椂銆備笉鐢� pointer:iOS 涓€璇嗗埆闀挎寜灏辩粰椤甸潰鍙� pointercancel,
+  // 浼氭妸璁℃椂鍣ㄦ帎鎺夈€佽鍘熺敓閫夋嫨/澶嶅埗鎺ョ(灏辨槸"鎵撴灦"鐨勬牴鍥�);touch 涓嶄細琚繖鏍峰彇娑堛€�
+  // 鍘熺敓閫夋嫨/callout 鐢� CSS 鐨� user-select:none / -webkit-touch-callout:none 鍘嬩綇銆�
   function endTouch(e){
     clearPress();
     if (isOpen()){
       swallowClick = true;
-      setTimeout(() => { swallowClick = false; }, 500);                 // 吞掉抬指后补发的合成 click
-      if (e && e.cancelable && e.type === "touchend") e.preventDefault(); // 再抑制一次原生默认行为
+      setTimeout(() => { swallowClick = false; }, 500);                 // 鍚炴帀鎶寚鍚庤ˉ鍙戠殑鍚堟垚 click
+      if (e && e.cancelable && e.type === "touchend") e.preventDefault(); // 鍐嶆姂鍒朵竴娆″師鐢熼粯璁よ涓�
     }
   }
   scrollEl.addEventListener("touchstart", (e) => {
-    if (isOpen() || e.touches.length !== 1) return;          // 多指(缩放)不触发
+    if (isOpen() || e.touches.length !== 1) return;          // 澶氭寚(缂╂斁)涓嶈Е鍙�
     const bubble = e.target.closest(".bubble");
     if (!bubble || !scrollEl.contains(bubble) || e.target.closest("a")) return;
     pressBubble = bubble;
@@ -5474,12 +5526,12 @@ function applyReaction(ev){
   scrollEl.addEventListener("touchmove", (e) => {
     if (!pressBubble || !e.touches.length) return;
     const t = e.touches[0];
-    if (Math.abs(t.clientX - startX) > 10 || Math.abs(t.clientY - startY) > 10) clearPress();   // 移动=滚动,取消长按
+    if (Math.abs(t.clientX - startX) > 10 || Math.abs(t.clientY - startY) > 10) clearPress();   // 绉诲姩=婊氬姩,鍙栨秷闀挎寜
   }, { passive:true });
-  scrollEl.addEventListener("touchend", endTouch, { passive:false });   // 非 passive:菜单已开时要 preventDefault
+  scrollEl.addEventListener("touchend", endTouch, { passive:false });   // 闈� passive:鑿滃崟宸插紑鏃惰 preventDefault
   scrollEl.addEventListener("touchcancel", endTouch, { passive:true });
 
-  // 桌面右键
+  // 妗岄潰鍙抽敭
   scrollEl.addEventListener("contextmenu", (e) => {
     const bubble = e.target.closest(".bubble");
     if (!bubble || !scrollEl.contains(bubble)) return;
@@ -5500,14 +5552,14 @@ function applyReaction(ev){
   scrollEl.addEventListener("scroll", () => { if (isOpen()) close(); }, { passive:true });
 })();
 
-/* ════════════ 滚动 ════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 婊氬姩 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 function nearBottom(){ return scrollEl.scrollHeight - scrollEl.scrollTop - scrollEl.clientHeight < 160; }
 function scrollToBottom({ smooth = false } = {}){
-  hideNewMsgPill();              // 任何"回到底部"都顺手收起胶囊
-  // 回收态:若窗口没贴底(最新行在 bottomSpacer 里没物化),直接 scrollTop=scrollHeight 会落进空白 → 先做贴底渲染物化最新一批
+  hideNewMsgPill();              // 浠讳綍"鍥炲埌搴曢儴"閮介『鎵嬫敹璧疯兌鍥�
+  // 鍥炴敹鎬�:鑻ョ獥鍙ｆ病璐村簳(鏈€鏂拌鍦� bottomSpacer 閲屾病鐗╁寲),鐩存帴 scrollTop=scrollHeight 浼氳惤杩涚┖鐧� 鈫� 鍏堝仛璐村簳娓叉煋鐗╁寲鏈€鏂颁竴鎵�
   const bottomMaterialized = virtualRows.length <= DOM_WINDOW || domEnd === virtualRows.length;
   if (!bottomMaterialized){
-    scheduleRender({ stickToBottom: true });   // resolveWindow 设 domEnd=n + jumpToBottom 钉到底(大跳,不做 smooth)
+    scheduleRender({ stickToBottom: true });   // resolveWindow 璁� domEnd=n + jumpToBottom 閽夊埌搴�(澶ц烦,涓嶅仛 smooth)
     return;
   }
   requestAnimationFrame(() => {
@@ -5517,7 +5569,7 @@ function scrollToBottom({ smooth = false } = {}){
     scheduleRender();
   });
 }
-// 滚动停下后(惯性结束)才动窗口:这是 DOM 回收守丝滑命根的开关——卸载/插入/写 scrollTop 全 gate 在这里
+// 婊氬姩鍋滀笅鍚�(鎯€х粨鏉�)鎵嶅姩绐楀彛:杩欐槸 DOM 鍥炴敹瀹堜笣婊戝懡鏍圭殑寮€鍏斥€斺€斿嵏杞�/鎻掑叆/鍐� scrollTop 鍏� gate 鍦ㄨ繖閲�
 function onScrollIdle(){
   scrolling = false;
   scrollIdleTimer = null;
@@ -5525,16 +5577,16 @@ function onScrollIdle(){
 }
 function maybeRecenterWindow(){
   const n = virtualRows.length;
-  if (n <= DOM_WINDOW) return;                    // 全量渲染态,无窗口可调
+  if (n <= DOM_WINDOW) return;                    // 鍏ㄩ噺娓叉煋鎬�,鏃犵獥鍙ｅ彲璋�
   const v = viewportRowRange();
   if (!v){ doRecenterWindow(); return; }
-  const nearTop = domStart > 0 && (v.start - domStart) < DOM_EDGE;       // 视口逼近物化顶 → 上滑窗
-  const nearBot = domEnd < n && (domEnd - 1 - v.end) < DOM_EDGE;         // 视口逼近物化底 → 下滑窗
-  const tooWide = (domEnd - domStart) > DOM_WINDOW + 200;                // 贴边突发期临时超额(两端都物化)→ 收回
+  const nearTop = domStart > 0 && (v.start - domStart) < DOM_EDGE;       // 瑙嗗彛閫艰繎鐗╁寲椤� 鈫� 涓婃粦绐�
+  const nearBot = domEnd < n && (domEnd - 1 - v.end) < DOM_EDGE;         // 瑙嗗彛閫艰繎鐗╁寲搴� 鈫� 涓嬫粦绐�
+  const tooWide = (domEnd - domStart) > DOM_WINDOW + 200;                // 璐磋竟绐佸彂鏈熶复鏃惰秴棰�(涓ょ閮界墿鍖�)鈫� 鏀跺洖
   if (nearTop || nearBot || tooWide) doRecenterWindow();
 }
 function doRecenterWindow(){
-  const anchor = captureAnchor();                 // idle 才写 scrollTop,不与惯性打架
+  const anchor = captureAnchor();                 // idle 鎵嶅啓 scrollTop,涓嶄笌鎯€ф墦鏋�
   renderVirtualList({ recenter: true, anchor });
 }
 scrollEl.addEventListener("scroll", () => {
@@ -5544,18 +5596,18 @@ scrollEl.addEventListener("scroll", () => {
   scrolling = true;
   if (scrollIdleTimer) clearTimeout(scrollIdleTimer);
   scrollIdleTimer = setTimeout(onScrollIdle, SCROLL_IDLE_MS);
-  // 只在「物化顶部已到 virtualRows[0]」时才从服务器取更早(否则上方还有内存里的行,recenter 物化即可,不必联网)
+  // 鍙湪銆岀墿鍖栭《閮ㄥ凡鍒� virtualRows[0]銆嶆椂鎵嶄粠鏈嶅姟鍣ㄥ彇鏇存棭(鍚﹀垯涓婃柟杩樻湁鍐呭瓨閲岀殑琛�,recenter 鐗╁寲鍗冲彲,涓嶅繀鑱旂綉)
   if ((virtualRows.length <= DOM_WINDOW || domStart === 0) && top < OLDER_LOAD_THRESHOLD) loadOlderMessages();
   if (nearBottom()) hideNewMsgPill();
-  // 滚动期间不 render、不写 scrollTop,完全交给原生滚动 → 不抖;窗口调整推迟到 onScrollIdle
+  // 婊氬姩鏈熼棿涓� render銆佷笉鍐� scrollTop,瀹屽叏浜ょ粰鍘熺敓婊氬姩 鈫� 涓嶆姈;绐楀彛璋冩暣鎺ㄨ繜鍒� onScrollIdle
 }, { passive:true });
 
-/* ════════════ 回到最新 · 新消息胶囊 ════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 鍥炲埌鏈€鏂� 路 鏂版秷鎭兌鍥� 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 function showNewMsgPill(){ if (newMsgBtn) newMsgBtn.classList.add("show"); }
 function hideNewMsgPill(){ if (newMsgBtn) newMsgBtn.classList.remove("show"); }
 if (newMsgBtn) newMsgBtn.addEventListener("click", () => { hideNewMsgPill(); scrollToBottom({ smooth:true }); });
 
-/* ════════════ IndexedDB 近端缓存 ════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 IndexedDB 杩戠缂撳瓨 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 function openMessageDb(){
   return new Promise((resolve, reject) => {
     if (!window.indexedDB){ reject(new Error("indexedDB unavailable")); return; }
@@ -5605,18 +5657,18 @@ function scheduleCacheSave(){
   cacheTimer = setTimeout(writeMessageCache, 400);
 }
 
-/* ════════════ 提示音 ════════════
-   播放同目录下的 send.mp3(发送/收到共用一个音),用 WebAudio 解码,
-   不受 iPhone 静音键影响。iOS 需用户手势解锁(首次 pointerdown / doSend / 登录)。
-   prefers-reduced-motion 或本机关掉(localStorage companion_sound=off)时静音;
-   文件缺失/解码失败则静默,不报错。 */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 鎻愮ず闊� 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲
+   鎾斁鍚岀洰褰曚笅鐨� send.mp3(鍙戦€�/鏀跺埌鍏辩敤涓€涓煶),鐢� WebAudio 瑙ｇ爜,
+   涓嶅彈 iPhone 闈欓煶閿奖鍝嶃€俰OS 闇€鐢ㄦ埛鎵嬪娍瑙ｉ攣(棣栨 pointerdown / doSend / 鐧诲綍)銆�
+   prefers-reduced-motion 鎴栨湰鏈哄叧鎺�(localStorage companion_sound=off)鏃堕潤闊�;
+   鏂囦欢缂哄け/瑙ｇ爜澶辫触鍒欓潤榛�,涓嶆姤閿欍€� */
 const prefersReducedMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-const SOUND_FILES = { send: "send.mp3" };        // 只用一个音,发送/收到共用
-const SOUND_GAIN  = { send: 0.9 };               // 音量微调(主要由 mp3 本身决定),嫌吵改小
+const SOUND_FILES = { send: "send.mp3" };        // 鍙敤涓€涓煶,鍙戦€�/鏀跺埌鍏辩敤
+const SOUND_GAIN  = { send: 0.9 };               // 闊抽噺寰皟(涓昏鐢� mp3 鏈韩鍐冲畾),瀚屽惖鏀瑰皬
 let audioCtx = null;
 let soundOn = true;
 try{ soundOn = localStorage.getItem("companion_sound") !== "off"; }catch(_){}
-const soundBuffers = {};            // name -> AudioBuffer(已解码) | null(确认无文件) | undefined(未加载)
+const soundBuffers = {};            // name -> AudioBuffer(宸茶В鐮�) | null(纭鏃犳枃浠�) | undefined(鏈姞杞�)
 let soundLoadStarted = false;
 function ensureAudio(){
   if (prefersReducedMotion || !soundOn) return null;
@@ -5629,7 +5681,7 @@ function ensureAudio(){
   loadSounds();
   return audioCtx;
 }
-function loadSounds(){               // 解锁后预解码一次,发消息时即时可播
+function loadSounds(){               // 瑙ｉ攣鍚庨瑙ｇ爜涓€娆�,鍙戞秷鎭椂鍗虫椂鍙挱
   if (soundLoadStarted || !audioCtx) return;
   soundLoadStarted = true;
   Object.keys(SOUND_FILES).forEach((name) => {
@@ -5642,9 +5694,9 @@ function loadSounds(){               // 解锁后预解码一次,发消息时即
 }
 function playSound(name){
   const ctx = ensureAudio();
-  if (!ctx || ctx.state !== "running") return;   // 未解锁时静默
+  if (!ctx || ctx.state !== "running") return;   // 鏈В閿佹椂闈欓粯
   const buf = soundBuffers[name];
-  if (!buf) return;                              // 加载中/无文件 → 这次不响
+  if (!buf) return;                              // 鍔犺浇涓�/鏃犳枃浠� 鈫� 杩欐涓嶅搷
   const src = ctx.createBufferSource();
   const g = ctx.createGain();
   g.gain.value = SOUND_GAIN[name] || 0.85;
@@ -5652,11 +5704,11 @@ function playSound(name){
   src.connect(g); g.connect(ctx.destination);
   try{ src.start(); }catch(_){}
 }
-function playSendSound(){ playSound("send"); }      // 我发出
+function playSendSound(){ playSound("send"); }      // 鎴戝彂鍑�
 function playReceiveSound(){ playSound("send"); }   // incoming from the AI (same chime)
-window.addEventListener("pointerdown", ensureAudio, { once:true });   // 进页面首次触摸即解锁+预加载
+window.addEventListener("pointerdown", ensureAudio, { once:true });   // 杩涢〉闈㈤娆¤Е鎽稿嵆瑙ｉ攣+棰勫姞杞�
 
-/* ════════════ 发送 ════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 鍙戦€� 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 let composing = false;
 function focusInputWithoutPageScroll(e){
   if (document.activeElement === inputEl) return;
@@ -5687,7 +5739,7 @@ sendBtn.addEventListener("click", doSend);
 function triggerSendPress(){
   if (!sendBtn) return;
   sendBtn.classList.remove("send-go");
-  void sendBtn.offsetWidth;      // 强制重排,连发也能重启动画
+  void sendBtn.offsetWidth;      // 寮哄埗閲嶆帓,杩炲彂涔熻兘閲嶅惎鍔ㄧ敾
   sendBtn.classList.add("send-go");
   sendBtn.addEventListener("animationend", () => sendBtn.classList.remove("send-go"), { once:true });
 }
@@ -5695,8 +5747,8 @@ function triggerSendPress(){
 async function doSend(){
   const text = inputEl.value.trim();
   if (!text) return;
-  triggerSendPress();            // 发送键:轻按回弹的小反馈
-  ensureAudio();                 // 手势内解锁/预热音频
+  triggerSendPress();            // 鍙戦€侀敭:杞绘寜鍥炲脊鐨勫皬鍙嶉
+  ensureAudio();                 // 鎵嬪娍鍐呰В閿�/棰勭儹闊抽
   inputEl.value = "";
   inputEl.style.height = "auto";
   sendBtn.classList.remove("hidden");
@@ -5709,8 +5761,8 @@ async function doSend(){
   const optimistic = { id: tempKey, ts: new Date(optimisticTs).toISOString(), from:"human", kind:"user", text, meta:optimisticMeta, status:"sending" };
   seen.add(tempKey);
   setMessage(optimistic, { render:false, cache:false });
-  freshKeys.add(tempKey);        // 入场弹一下
-  playSendSound();               // 发出反馈音
+  freshKeys.add(tempKey);        // 鍏ュ満寮逛竴涓�
+  playSendSound();               // 鍙戝嚭鍙嶉闊�
   rememberPendingOutgoing(tempKey, text, optimisticTs);
   scheduleRender({ stickToBottom:true });
 
@@ -5726,7 +5778,7 @@ async function doSend(){
   }
 }
 
-/* ════════════ 附件发送 ════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 闄勪欢鍙戦€� 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 const ATT_MAX = 10 * 1024 * 1024;
 function isImageFile(file){
   return /^image\//.test(file.type || "") || /\.(jpe?g|png|gif|webp|heic|heif|bmp)$/i.test(file.name || "");
@@ -5734,7 +5786,7 @@ function isImageFile(file){
 function imageToJpeg(file){
   return new Promise((resolve) => {
     if (!isImageFile(file)){ resolve(null); return; }
-    if (/gif$/i.test(file.type || "") || /\.gif$/i.test(file.name || "")){ resolve(null); return; }  // 动图保留原样
+    if (/gif$/i.test(file.type || "") || /\.gif$/i.test(file.name || "")){ resolve(null); return; }  // 鍔ㄥ浘淇濈暀鍘熸牱
     const url = URL.createObjectURL(file);
     const img = new Image();
     img.onload = () => {
@@ -5770,7 +5822,7 @@ async function sendOneFile(file){
       if (conv){ blob = conv.blob; name = conv.name; mime = "image/jpeg"; imgW = conv.width || 0; imgH = conv.height || 0; }
     }catch(_){}
   }
-  if (blob.size > ATT_MAX){ showToast("文件超过 10MB，发不了"); return; }
+  if (blob.size > ATT_MAX){ showToast("鏂囦欢瓒呰繃 10MB锛屽彂涓嶄簡"); return; }
   const kind = image ? "image" : "file";
   const localUrl = image ? URL.createObjectURL(blob) : "";
   const optimisticTs = Date.now();
@@ -5798,7 +5850,7 @@ async function sendOneFile(file){
   }catch(err){
     dropPendingOutgoing(tempKey);
     if (String(err.message) === "401") return;
-    if (String(err.message) === "413") showToast("文件太大（上限 10MB）");
+    if (String(err.message) === "413") showToast("鏂囦欢澶ぇ锛堜笂闄� 10MB锛�");
     setMessage({ ...optimistic, meta: { attachments: [{ ...att0, uploading: false, failed: true }] }, status: "failed" });
   }
 }
@@ -5811,13 +5863,13 @@ if (clipBtn && clipInput){
   clipInput.addEventListener("change", () => { const fs = Array.from(clipInput.files || []); clipInput.value = ""; handleFiles(fs); });
 }
 
-/* ════════════ 登录 / 401 ════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 鐧诲綍 / 401 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 function handle401(){
   secret = null;
   localStorage.removeItem(LS_KEY);
   if (es){ try{ es.close(); }catch(e){} es = null; }
   if (healthTimer){ clearInterval(healthTimer); healthTimer = null; }
-  showLogin("密钥不对,请重新输入。");
+  showLogin("瀵嗛挜涓嶅,璇烽噸鏂拌緭鍏ャ€�");
 }
 
 function showLogin(msg){
@@ -5833,10 +5885,10 @@ $("#loginForm").addEventListener("submit", async (e) => {
   const val = $("#secretInput").value.trim();
   if (!val) return;
   const btn = e.target.querySelector("button");
-  btn.disabled = true; btn.textContent = "连接中…";
+  btn.disabled = true; btn.textContent = "杩炴帴涓€�";
   secret = val;
   try{
-    // 用 history 验证密钥(401 会抛错)
+    // 鐢� history 楠岃瘉瀵嗛挜(401 浼氭姏閿�)
     await loadSessions();
     loadBrain();
     const msgs = await apiLatestHistory();
@@ -5844,13 +5896,13 @@ $("#loginForm").addEventListener("submit", async (e) => {
     startChat(msgs);
   }catch(err){
     secret = null;
-    if (String(err.message) !== "401") $("#loginErr").textContent = "连不上,稍后再试。";
+    if (String(err.message) !== "401") $("#loginErr").textContent = "杩炰笉涓�,绋嶅悗鍐嶈瘯銆�";
   }finally{
-    btn.disabled = false; btn.textContent = "连接";
+    btn.disabled = false; btn.textContent = "杩炴帴";
   }
 });
 
-/* ════════════ 启动 ════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 鍚姩 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
 function startRealtime(){
   openStream();
 
@@ -5869,7 +5921,7 @@ function startRealtime(){
     if (!document.hidden && secret) backfill();
   }, BACKFILL_MS);
 
-  // healthz 兜底:stream 没连上时也能反映在线/离线
+  // healthz 鍏滃簳:stream 娌¤繛涓婃椂涔熻兘鍙嶆槧鍦ㄧ嚎/绂荤嚎
   if (healthTimer) clearInterval(healthTimer);
   healthTimer = setInterval(async () => {
     if (connected) return;
@@ -5917,12 +5969,12 @@ async function init(){
       startChat(msgs);
     }
   }catch(err){
-    if (String(err.message) !== "401" && !showedCache) showLogin("连不上,请确认密钥。");
+    if (String(err.message) !== "401" && !showedCache) showLogin("杩炰笉涓�,璇风‘璁ゅ瘑閽ャ€�");
     else if (showedCache) startRealtime();
   }
 }
 
-/* 回前台重同步:iOS 后台会挂起连接 */
+/* 鍥炲墠鍙伴噸鍚屾:iOS 鍚庡彴浼氭寕璧疯繛鎺� */
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState !== "visible" || !secret) return;
   backfill();
@@ -5967,7 +6019,7 @@ document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") applyPwaViewportBleed();
 });
 
-/* 键盘 / 安全区:只移动输入栏和消息区,不改整体页面高度。 */
+/* 閿洏 / 瀹夊叏鍖�:鍙Щ鍔ㄨ緭鍏ユ爮鍜屾秷鎭尯,涓嶆敼鏁翠綋椤甸潰楂樺害銆� */
 if (window.visualViewport){
   const vv = window.visualViewport;
   const applyVV = () => {
