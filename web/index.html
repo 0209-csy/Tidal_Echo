@@ -266,6 +266,8 @@
   .topbtn:active{ transform: scale(.9); }
   .topbtn svg{ width:24px; height:24px; display:block; }
   .topbtn.more svg{ width:22px; height:22px; }
+  /* Claude 右侧的终端功能按钮整体向右微调，图标和可点击区域一起移动 */
+  .header-actions .terminal{ position:relative; left:8px; }
   .topbtn.terminal.active{ color:var(--accent); }
   .session-pop{
     position:absolute;
@@ -4202,16 +4204,59 @@ const bottomSpacer = document.createElement("div");
 topSpacer.className = "v-spacer";
 bottomSpacer.className = "v-spacer";
 
-function tsMs(m){ return new Date(m.ts).getTime(); }
+function parseTs(ts){
+  if (ts === null || ts === undefined || ts === "") return NaN;
+  if (ts instanceof Date) return ts.getTime();
+
+  if (typeof ts === "number"){
+    return Number.isFinite(ts) ? (ts < 100000000000 ? ts * 1000 : ts) : NaN;
+  }
+
+  const s = String(ts).trim();
+  if (!s) return NaN;
+
+  // 支持后端返回的秒/毫秒时间戳字符串
+  if (/^\\d+(?:\\.\\d+)?$/.test(s)){
+    const n = Number(s);
+    return Number.isFinite(n) ? (n < 100000000000 ? n * 1000 : n) : NaN;
+  }
+
+  // 先按标准 ISO / 浏览器可识别格式解析
+  let d = new Date(s);
+  if (!Number.isNaN(d.getTime())) return d.getTime();
+
+  // 兼容后端常见的 "YYYY-MM-DD HH:mm:ss" 格式
+  const normalized = s.replace(/^(.+?)\\s+/, "$1T");
+  d = new Date(normalized);
+  if (!Number.isNaN(d.getTime())) return d.getTime();
+
+  // 无时区的数据库时间按项目固定的 Asia/Shanghai 解释
+  if (/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?$/.test(normalized)){
+    d = new Date(normalized + "+08:00");
+    if (!Number.isNaN(d.getTime())) return d.getTime();
+  }
+
+  return NaN;
+}
+
+function tsMs(m){ return parseTs(m && m.ts); }
 
 const TZ = "Asia/Shanghai";  // pin all timestamps to Beijing time, independent of device TZ
 function fmtTime(ts){
-  return new Date(ts).toLocaleTimeString("zh-CN", { hour:"2-digit", minute:"2-digit", hour12:false, timeZone:TZ });
+  const ms = parseTs(ts);
+  if (Number.isNaN(ms)) return "";
+  return new Date(ms).toLocaleTimeString("zh-CN", { hour:"2-digit", minute:"2-digit", hour12:false, timeZone:TZ });
 }
-function dayKey(ts){ return new Date(ts).toLocaleDateString("en-CA", { timeZone:TZ }); }
+function dayKey(ts){
+  const ms = parseTs(ts);
+  if (Number.isNaN(ms)) return "";
+  return new Date(ms).toLocaleDateString("en-CA", { timeZone:TZ });
+}
 function fmtDay(ts){
-  const md = new Date(ts).toLocaleDateString("en-US", { month:"short", day:"2-digit", timeZone:TZ });
-  return `${md}, ${fmtTime(ts)}`;
+  const ms = parseTs(ts);
+  if (Number.isNaN(ms)) return "";
+  const md = new Date(ms).toLocaleDateString("en-US", { month:"short", day:"2-digit", timeZone:TZ });
+  return `${md}, ${fmtTime(ms)}`;
 }
 
 function escapeHtml(s){
